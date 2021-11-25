@@ -1,0 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap");
+@import "~bootstrap/scss/bootstrap.scss";
+
+.font-playfair-display {
+  font-family: "Playfair Display", serif;
+}
+
+.font-roboto {
+  font-family: "Roboto", sans-serif;
+}
+
+.button-custom-style {
+  color: #fff;
+  background-color: #ff1616;
+  border-color: #ff1616;
+  border-radius: 35px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  &:hover {
+    background-color: #c50e0e;
+    border-color: #c50e0e;
+    box-shadow: none;
+    color: #fff;
+  }
+  &:focus {
+    border-color: #c50e0e;
+    background-color: #c50e0e;
+    box-shadow: none;
+  }
+}
+
+.nav-pills {
+  .nav-link {
+    border: 1px solid grey;
+    border-radius: 35px;
+    color: #212529;
+  }
+
+  .nav-link.active,
+  .show > .nav-link {
+    color: #fff;
+    background-color: #ff1616;
+    border: 1px solid #ff1616;
+  }
+}
+
+.button-outline-custom-style {
+  color: #ff1616;
+  background-color: #fff;
+  border-radius: 50px;
+  border-color: #ff1616;
+  &:hover {
+    background-color: #c50e0e;
+    border-color: #c50e0e;
+    box-shadow: none;
+    color: #fff;
+  }
+  &:focus {
+    border-color: #c50e0e;
+    background-color: #c50e0e;
+    box-shadow: none;
+    color: #fff;
+  }
+}
+
+.bi-star-fill {
+  font-size: 13px;
+  color: #ff5700;
+}
+
+.bi-cart {
+  font-size: 30px;
+}
+
+.cart-badge {
+  left: 15px;
+  font-size: 9px;
+}
+
+.text-red {
+  color: #ff1616 !important;
+}
+
+.bg-red {
+  background-color: #ff1616;
+}
+
+.fs-7 {
+  font-size: 12px;
+}
+
+// _Footer.jsx
+.custom-ul-li {
+  padding: 0;
+  margin: 0;
+  line-height: 2rem;
+  li {
+    list-style: none;
+    a {
+      text-decoration: underline transparent;
+      text-decoration-line: underline;
+      text-decoration-thickness: initial;
+      text-decoration-style: initial;
+      text-decoration-color: transparent;
+      color: inherit;
+      &:hover {
+        text-decoration: underline;
+        text-decoration-line: underline;
+        text-decoration-thickness: 2px;
+        text-decoration-style: initial;
+        text-decoration-color: initial;
+        text-underline-offset: 2px;
+      }
+    }
+  }
+}
+// end Footer.jsx

@@ -1,0 +1,48 @@
+@import "variables";
+
+.card_background {
+  background-color: $red;
+  padding: 3rem;
+  border-radius: 0;
+}
+
+.icon_star {
+  margin-top: -10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  i {
+    font-size: 1.2rem;
+    color: $white;
+  }
+}
+
+.btn_custom_1 {
+  background-color: $white;
+  padding: 1rem 1.5rem;
+  color: $black;
+  border-radius: 35px;
+  font-weight: 500;
+  border: none;
+  transition: 0.3s;
+  &:hover {
+    color: $white;
+    background-color: $red;
+    box-shadow: 0px 10px 40px 0px rgba(255, 255, 255, 0.75);
+    -webkit-box-shadow: 0px 10px 40px 0px rgba(255, 255, 255, 0.75);
+    -moz-box-shadow: 0px 10px 40px 0px rgba(255, 255, 255, 0.75);
+  }
+}
+
+.btn_custom_2 {
+  background-color: transparent;
+  color: $white;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  border: 2px solid $white;
+  transition: 0.3s;
+  &:hover {
+    color: $black;
+    background-color: $white;
+  }
+}

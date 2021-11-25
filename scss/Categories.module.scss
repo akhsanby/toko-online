@@ -1,0 +1,58 @@
+@import "variables";
+
+.card_body_1 {
+  p {
+    font-family: $font-playfair;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  form {
+    div {
+      text-transform: capitalize;
+      font-family: $font-roboto;
+      font-size: 16px;
+      input:checked {
+        background-color: $red;
+        border-color: $red;
+      }
+      input:checked[type="radio"] {
+        background-image: none;
+      }
+      input:focus {
+        box-shadow: 0 0 0 0.25rem rgb(225 83 97 / 50%);
+      }
+    }
+  }
+}
+
+.card_body_2 {
+  p {
+    font-family: $font-playfair;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  select {
+    &:focus {
+      box-shadow: 0 0 0 0.25rem rgb(225 83 97 / 50%);
+      border-color: $red;
+    }
+    option {
+      font-family: $font-roboto;
+      font-size: 16px;
+    }
+  }
+}
+
+.btn_custom {
+  border: 1px solid $red;
+  background-color: $white;
+  padding: 1rem 1.5rem;
+  color: $red;
+  border-radius: 35px;
+  font-weight: 500;
+  transition: 0.3s;
+  &:hover {
+    color: $white;
+    background-color: $red;
+  }
+}
