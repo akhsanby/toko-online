@@ -1,29 +1,13 @@
 @import "variables";
+@import "mixins";
 
 .custom_input {
+  vertical-align: middle;
   input[type="text"] {
-    &:hover {
-      border: 1px solid $pink;
-    }
-    &:focus {
-      box-shadow: 0 0 0 0.25rem rgb(225 22 22 / 50%);
-      border: none;
-    }
+    @include custom_form;
   }
 }
 
 .custom_btn {
-  border: 1px solid $red;
-  background-color: $red;
-  border-radius: 35px;
-  color: $white;
-  padding: 0.2rem 1rem;
-  transition: background-color, box-shadow 0.2s;
-  &:hover {
-    background-color: $dark-red;
-    border: 1px solid $dark-red;
-  }
-  &:focus {
-    box-shadow: 0 0 0 0.25rem rgb(225 22 22 / 50%);
-  }
+  @include custom_button($padding: 0.5rem 1rem);
 }

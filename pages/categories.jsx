@@ -3,16 +3,15 @@ import _Jumbotron from "../components/_Jumbotron";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import _Card from "../components/_Card";
 import styles from "../scss/Categories.module.scss";
-import starIcon from "bootstrap-icons/icons/star-fill.svg";
 
 export default function Categories() {
   return (
     <Layout>
       <Container>
-        <_Jumbotron />
+        <_Jumbotron title="Product Category" />
         <Row className="my-5">
           <Col lg={4}>
-            <Card>
+            <Card className="mb-4">
               <Card.Body className={styles.card_body_1}>
                 <Card.Text>Filter Categories</Card.Text>
                 <Form>
@@ -47,22 +46,34 @@ export default function Categories() {
                 </Form>
               </Card.Body>
               <Card.Body className={styles.card_body_2}>
-                <Card.Text>Filter By Rating</Card.Text>
-                <Form.Select aria-label="Default select example">
-                  <option>Open this select menu</option>
-                  <option value="5">5 Star Rating</option>
-                  <option value="4">4 Star Rating</option>
-                  <option value="3">3 Star Rating</option>
-                  <option value="2">2 Star Rating</option>
-                  <option value="1">1 Star Rating</option>
-                </Form.Select>
+                <Card.Text>Filter By Price</Card.Text>
+                <div className="mb-2">
+                  <Form.Control
+                    size="sm"
+                    type="number"
+                    placeholder="MIN Price"
+                  />
+                  <span
+                    className="bi bi-dash-lg mx-3"
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "black",
+                    }}
+                  ></span>
+                  <Form.Control
+                    size="sm"
+                    type="number"
+                    placeholder="MAX Price"
+                  />
+                </div>
+                <button type="button">Apply</button>
               </Card.Body>
             </Card>
           </Col>
           <Col lg={8}>
             <Row>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-                <Col className="mb-4" key={i} lg={4}>
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
+                <Col className="mb-4" key={i} lg={3} md={4} xs={6}>
                   <_Card />
                 </Col>
               ))}

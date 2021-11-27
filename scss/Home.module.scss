@@ -1,0 +1,6 @@
+@import "variables";
+@import "mixins";
+
+.custom_btn {
+  @include custom_button($padding: 0.5rem 1rem);
+}

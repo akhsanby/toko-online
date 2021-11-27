@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { Card, Button, Form } from "react-bootstrap";
+import { Card, Form } from "react-bootstrap";
+import styles from "../scss/Login.module.scss";
 
 export default function Login() {
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
+    <div className="d-flex justify-content-center align-items-center vh-100 font-roboto">
       <Card
         style={{ width: "30rem" }}
-        className="shadow-lg p-3 mb-5 bg-body rounded"
+        className="shadow-lg p-3 bg-body rounded"
       >
         <Card.Body>
           <div className="text-center mb-4">
@@ -16,33 +17,49 @@ export default function Login() {
             </Card.Text>
           </div>
           <Form className="mx-4">
-            <Form.Group className="mb-3" controlId="formBasicFullName">
+            <Form.Group className="mb-3">
               <Form.Label className="fw-bold">Full Name</Form.Label>
-              <Form.Control type="email" placeholder="Enter Full Name" />
+              <Form.Control
+                className={styles.form_control}
+                type="text"
+                placeholder="Enter Full Name"
+              />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3">
               <Form.Label className="fw-bold">Email Address</Form.Label>
-              <Form.Control type="email" placeholder="Enter Email Address" />
+              <Form.Control
+                className={styles.form_control}
+                type="text"
+                placeholder="Enter Email Address"
+              />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3">
               <Form.Label className="fw-bold">Password</Form.Label>
-              <Form.Control type="password" placeholder="Enter Password" />
+              <Form.Control
+                className={styles.form_control}
+                type="password"
+                placeholder="Enter Password"
+              />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
+            <Form.Group className="mb-3">
               <Form.Label className="fw-bold">Confirm Password</Form.Label>
-              <Form.Control type="password" placeholder="Confirm Password" />
+              <Form.Control
+                className={styles.form_control}
+                type="password"
+                placeholder="Confirm Password"
+              />
             </Form.Group>
             <div className="mt-4 d-flex justify-content-between align-items-center">
               <div>
                 Already have an account?{" "}
                 <Link href="/login">
-                  <a className="text-decoration-none text-danger">Login</a>
+                  <a className={styles.tag_a_link}>Login</a>
                 </Link>{" "}
                 here
               </div>
-              <Button variant="danger" type="submit">
+              <button className={styles.custom_btn} type="button">
                 Register
-              </Button>
+              </button>
             </div>
           </Form>
         </Card.Body>

@@ -1,0 +1,36 @@
+@import "variables";
+
+@mixin custom_tag_anchor {
+  text-decoration: none;
+  color: $red;
+  &:hover {
+    color: $dark-red;
+  }
+}
+
+@mixin custom_form {
+  &:hover {
+    border: 1px solid $pink;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.25rem rgb(225 22 22 / 50%);
+    border: 1px solid $pink;
+  }
+}
+
+@mixin custom_button($padding) {
+  border: 1px solid $red;
+  background-color: $red;
+  color: $white;
+  font-weight: 500;
+  padding: $padding;
+  transition: 0.3s;
+  border-radius: 35px;
+  &:hover {
+    border: 1px solid $dark-red;
+    background-color: $dark-red;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.25rem rgb(225 83 97 / 50%);
+  }
+}

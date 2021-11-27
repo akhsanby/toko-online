@@ -1,0 +1,54 @@
+@import "variables";
+
+.custom_footer {
+  margin-top: 2rem;
+  font-family: $font-roboto;
+  background-color: $lavender;
+  padding-top: 3rem;
+}
+
+.button_outline_custom_style {
+  color: $red;
+  background-color: $white;
+  border-radius: 50px;
+  padding: 0.5rem 0.8rem;
+  border: 2px solid $red;
+  transition: 0.3s;
+  &:hover {
+    background-color: $dark-red;
+    border: 2px solid $dark-red;
+    box-shadow: none;
+    color: $white;
+  }
+  &:focus {
+    border: 2px solid $dark-red;
+    background-color: $dark-red;
+    color: $white;
+    box-shadow: 0 0 0 0.25rem rgb(225 83 97 / 50%);
+  }
+}
+
+.custom_ul_li {
+  padding: 0;
+  margin: 0;
+  line-height: 2rem;
+  li {
+    list-style: none;
+    a {
+      text-decoration: underline transparent;
+      text-decoration-line: underline;
+      text-decoration-thickness: initial;
+      text-decoration-style: initial;
+      text-decoration-color: transparent;
+      color: inherit;
+      &:hover {
+        text-decoration: underline;
+        text-decoration-line: underline;
+        text-decoration-thickness: 2px;
+        text-decoration-style: initial;
+        text-decoration-color: initial;
+        text-underline-offset: 2px;
+      }
+    }
+  }
+}

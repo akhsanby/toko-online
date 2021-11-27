@@ -4,7 +4,7 @@ import styles from "../scss/Carousel.module.scss";
 
 export default function _Carousel() {
   return (
-    <Carousel fade>
+    <Carousel className={styles.carousel}>
       <Carousel.Item className={styles.carousel_item_area}>
         <Image
           className="d-block w-100"
@@ -13,10 +13,6 @@ export default function _Carousel() {
           layout="fill"
           quality="30"
         />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <button type="button">Browse Store</button>
-        </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item className={styles.carousel_item_area}>
         <Image
@@ -26,11 +22,6 @@ export default function _Carousel() {
           layout="fill"
           quality="30"
         />
-
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <button type="button">Browse Store</button>
-        </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item className={styles.carousel_item_area}>
         <Image
@@ -40,11 +31,6 @@ export default function _Carousel() {
           layout="fill"
           quality="30"
         />
-
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <button type="button">Browse Store</button>
-        </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
   );

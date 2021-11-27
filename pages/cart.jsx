@@ -10,12 +10,13 @@ import {
 } from "react-bootstrap";
 import Image from "next/image";
 import _InputNumber from "../components/_InputNumber";
+import _Jumbotron from "../components/_Jumbotron";
 
 export default function Cart() {
   return (
     <Layout>
       <Container className="my-4">
-        <h1>Cart</h1>
+        <_Jumbotron title="Cart" />
         <Table responsive>
           <thead className={styles.custom_table_head}>
             <tr>

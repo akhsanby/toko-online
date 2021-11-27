@@ -1,7 +1,25 @@
 @import "variables";
+@import "mixins";
 
 .custom_navbar_1 {
   background-color: $lavender;
+  a {
+    color: $black !important;
+    font-family: $font-roboto;
+  }
+}
+
+.custom_admin_navbar {
+  background-color: $lavender;
+  a {
+    color: $black !important;
+    font-family: $font-roboto;
+  }
+}
+
+.custom_navbar_brand {
+  font-weight: bold;
+  font-size: 1.75rem;
 }
 
 .custom_navbar_2 {
@@ -13,25 +31,45 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: flex-end;
+  width: 100%;
   gap: 20px;
   a {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400 !important;
     font-family: $font-roboto;
-    color: $dark-blue !important;
+    color: $black !important;
     &:hover {
       color: $pink !important;
     }
   }
 }
 
+.custom_form_search {
+  display: flex;
+  width: 60%;
+  position: relative;
+  input {
+    @include custom_form;
+    border-radius: 35px;
+    padding: 0.5rem 2rem;
+  }
+  i {
+    position: absolute;
+    top: 6px;
+    right: 20px;
+    font-size: 20px;
+    color: $red;
+  }
+}
+
 .custom_nav_2 {
   gap: 1.8rem;
   a {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     font-family: $font-roboto;
-    color: $dark-grey !important;
+    color: $black !important;
     &:hover {
       color: $pink !important;
     }
@@ -52,22 +90,51 @@
 }
 
 .custom_btn_style {
-  border: 1px solid $red;
-  border-radius: 35px;
-  background-color: $red;
-  padding: 0.3rem 1rem;
-  color: $white;
-  transition: background-color, border 0.4s;
-  &:hover {
-    background-color: $dark-red;
-    border: 1px solid $dark-red;
-  }
+  @include custom_button($padding: 0.5rem 1rem);
 }
 
+// when screen have max width 576px
 @media screen and (max-width: 576px) {
+  // remove navbar brand
+  .custom_navbar_1 {
+    div {
+      a:nth-child(1) {
+        display: none !important;
+      }
+    }
+  }
+
+  .custom_navbar_brand {
+    display: none !important;
+  }
+
+  .custom_form_search {
+    display: flex;
+    width: 60%;
+  }
+
+  .custom_nav_1 {
+    display: flex;
+    justify-content: center;
+  }
+
+  .custom_nav_2 {
+    gap: 1rem !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
   .custom_nav_3 {
     gap: 0.2rem;
     display: flex;
     align-items: center;
+  }
+}
+
+// when screen have max width 992px
+@media screen and (max-width: 992px) {
+  .custom_nav_2 {
+    gap: 0;
   }
 }

@@ -1,0 +1,28 @@
+@import "variables";
+@import "mixins";
+
+.form_control {
+  @include custom_form;
+}
+
+.form_check {
+  input {
+    &:checked {
+      background-color: $red !important;
+      border: 1px solid $red !important;
+      background-image: none !important;
+    }
+    &:focus {
+      border: 1px solid $red !important;
+      box-shadow: 0 0 0 0.25rem rgb(225 22 22 / 50%);
+    }
+  }
+}
+
+.custom_btn {
+  @include custom_button($padding: 0.5rem 1rem);
+}
+
+.tag_a_link {
+  @include custom_tag_anchor;
+}
