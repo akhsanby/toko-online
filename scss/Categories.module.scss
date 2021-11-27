@@ -1,10 +1,11 @@
 @import "variables";
+@import "mixins";
 
 .card_body_1 {
   p {
-    font-family: $font-playfair;
+    font-family: $font-roboto;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 20px;
   }
   form {
     div {
@@ -27,32 +28,22 @@
 
 .card_body_2 {
   p {
-    font-family: $font-playfair;
-    font-size: 16px;
+    font-family: $font-roboto;
+    font-size: 20px;
     font-weight: 700;
   }
-  select {
-    &:focus {
-      box-shadow: 0 0 0 0.25rem rgb(225 83 97 / 50%);
-      border-color: $red;
+  div {
+    display: flex;
+    align-items: center;
+    input[type="number"] {
+      @include custom_form;
     }
-    option {
-      font-family: $font-roboto;
-      font-size: 16px;
-    }
+  }
+  button {
+    @include custom_button($padding: 0.2rem 2rem);
   }
 }
 
 .btn_custom {
-  border: 1px solid $red;
-  background-color: $white;
-  padding: 1rem 1.5rem;
-  color: $red;
-  border-radius: 35px;
-  font-weight: 500;
-  transition: 0.3s;
-  &:hover {
-    color: $white;
-    background-color: $red;
-  }
+  @include custom_button($padding: 1rem 2rem);
 }

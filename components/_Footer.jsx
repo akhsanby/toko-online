@@ -1,12 +1,10 @@
 import { Container, Row, Col } from "react-bootstrap";
 import Link from "next/link";
+import styles from "../scss/Footer.module.scss";
 
 export default function _Footer() {
   return (
-    <div
-      className="mt-5"
-      style={{ backgroundColor: "#fef4f4", paddingTop: "3rem" }}
-    >
+    <div className={styles.custom_footer}>
       <Container>
         <Row className="mb-5">
           <Col>
@@ -16,23 +14,23 @@ export default function _Footer() {
               other end year for go.
             </div>
             <div className="mt-2 d-flex gap-4">
-              <button className="btn button-outline-custom-style">
+              <button className={styles.button_outline_custom_style}>
                 <i className="bi bi-facebook"></i>
               </button>
-              <button className="btn button-outline-custom-style">
+              <button className={styles.button_outline_custom_style}>
                 <i className="bi bi-instagram"></i>
               </button>
-              <button className="btn button-outline-custom-style">
+              <button className={styles.button_outline_custom_style}>
                 <i className="bi bi-linkedin"></i>
               </button>
-              <button className="btn button-outline-custom-style">
+              <button className={styles.button_outline_custom_style}>
                 <i className="bi bi-youtube"></i>
               </button>
             </div>
           </Col>
           <Col>
             <p className="fs-5 fw-bold">Categories</p>
-            <ul className="custom-ul-li">
+            <ul className={styles.custom_ul_li}>
               <li>
                 <Link
                   href={{
@@ -77,7 +75,7 @@ export default function _Footer() {
           </Col>
           <Col>
             <p className="fs-5 fw-bold">Site Map</p>
-            <ul className="custom-ul-li">
+            <ul className={styles.custom_ul_li}>
               <li>
                 <a href="#">Home</a>
               </li>

@@ -6,9 +6,9 @@ import styles from "../scss/Manage.module.scss";
 export default function Manage() {
   return (
     <AdminLayout>
-      <Container className="my-4">
+      <Container className="my-4 font-roboto">
         <h1>Manage Stock</h1>
-        <Table bordered hover className="my-4">
+        <Table hover className="my-4">
           <thead>
             <tr>
               <th>Name Product</th>
@@ -41,7 +41,7 @@ export default function Manage() {
               <td className={styles.custom_input}>
                 <Form.Control type="text" />
               </td>
-              <td>
+              <td className="align-middle">
                 <button className={styles.custom_btn}>Update</button>
               </td>
             </tr>
@@ -69,7 +69,7 @@ export default function Manage() {
               <td className={styles.custom_input}>
                 <Form.Control type="text" />
               </td>
-              <td>
+              <td className="align-middle">
                 <button className={styles.custom_btn}>Update</button>
               </td>
             </tr>

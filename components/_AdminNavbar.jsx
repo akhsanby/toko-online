@@ -5,9 +5,9 @@ import styles from "../scss/Navbar.module.scss";
 export default function _Navbar() {
   return (
     <div>
-      <Navbar variant="light">
-        <Container>
-          <Navbar.Brand href="#" className="fw-bold fs-3">
+      <Navbar className={styles.custom_admin_navbar}>
+        <Container className="d-flex justify-content-center">
+          <Navbar.Brand href="#" className={styles.custom_navbar_brand}>
             99Online
           </Navbar.Brand>
           <Nav className={styles.custom_nav_3}>

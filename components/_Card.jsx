@@ -1,27 +1,22 @@
 import { Card, Row, Col } from "react-bootstrap";
+import styles from "../scss/Card.module.scss";
 
 export default function _Card() {
   return (
-    <Card style={{ width: "100%" }}>
+    <Card className={styles.card}>
       <Card.Img variant="top" src="https://placeimg.com/300/300/people" />
-      <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Subtitle>Card Subtitle</Card.Subtitle>
-        <Row className="mt-3 d-flex align-items-center">
-          <Col sm={7} className="pe-0">
-            <span className="d-block">
-              <i className="bi bi-star-fill"></i>
-              <i className="bi bi-star-fill"></i>
-              <i className="bi bi-star-fill"></i>
-              <i className="bi bi-star-fill"></i>
-              <i className="bi bi-star-fill"></i>
-            </span>
-            <span className="d-block fs-7">
-              (<span className="text-red">20</span> review)
-            </span>
+      <Card.Body className={styles.card_body}>
+        <Card.Title className="fw-bold fs-4">Card Title</Card.Title>
+        <Card.Subtitle className="text-muted">Card Subtitle</Card.Subtitle>
+        <div sm={7} className="text-red mt-2 fs-5 d-flex flex-nowrap">
+          Rp. 500
+        </div>
+        <Row className="mt-2">
+          <Col>
+            <i className="bi bi-star-fill"></i> <span>4.5</span>
           </Col>
-          <Col sm={5} className="text-red fw-bold fs-5 ps-0">
-            $5000
+          <Col>
+            <span className="text-red">20</span> sold
           </Col>
         </Row>
       </Card.Body>

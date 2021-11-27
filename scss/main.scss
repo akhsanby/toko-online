@@ -1,4 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap");
+
+$carousel-control-color: #fff;
+$carousel-control-width: 10%;
+$carousel-control-icon-width: 4rem;
+$carousel-indicator-width: 10px;
+$carousel-indicator-height: 10px;
+$carousel-indicator-spacer: 5px;
+$carousel-control-prev-icon-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='#{$carousel-control-color}' class='bi bi-arrow-left-circle' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z'/%3E%3C/svg%3E");
+$carousel-control-next-icon-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='#{$carousel-control-color}' class='bi bi-arrow-right-circle' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z'/%3E%3C/svg%3E");
+$carousel-transition-duration: 0.4s;
+
+$card-border-radius: 15px;
+
 @import "~bootstrap/scss/bootstrap.scss";
 
 .font-playfair-display {
@@ -34,6 +47,7 @@
     border: 1px solid grey;
     border-radius: 35px;
     color: #212529;
+    font-weight: 500;
   }
 
   .nav-link.active,
@@ -44,27 +58,8 @@
   }
 }
 
-.button-outline-custom-style {
-  color: #ff1616;
-  background-color: #fff;
-  border-radius: 50px;
-  border-color: #ff1616;
-  &:hover {
-    background-color: #c50e0e;
-    border-color: #c50e0e;
-    box-shadow: none;
-    color: #fff;
-  }
-  &:focus {
-    border-color: #c50e0e;
-    background-color: #c50e0e;
-    box-shadow: none;
-    color: #fff;
-  }
-}
-
 .bi-star-fill {
-  font-size: 13px;
+  font-size: 16px;
   color: #ff5700;
 }
 
@@ -88,30 +83,3 @@
 .fs-7 {
   font-size: 12px;
 }
-
-// _Footer.jsx
-.custom-ul-li {
-  padding: 0;
-  margin: 0;
-  line-height: 2rem;
-  li {
-    list-style: none;
-    a {
-      text-decoration: underline transparent;
-      text-decoration-line: underline;
-      text-decoration-thickness: initial;
-      text-decoration-style: initial;
-      text-decoration-color: transparent;
-      color: inherit;
-      &:hover {
-        text-decoration: underline;
-        text-decoration-line: underline;
-        text-decoration-thickness: 2px;
-        text-decoration-style: initial;
-        text-decoration-color: initial;
-        text-underline-offset: 2px;
-      }
-    }
-  }
-}
-// end Footer.jsx

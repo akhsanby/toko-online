@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import _Card from "./_Card";
+import styles from "../scss/CardSlider.module.scss";
 
 // Import Swiper styles
 import "swiper/css";
@@ -14,7 +15,7 @@ SwiperCore.use([Autoplay]);
 export default function _CardSlider() {
   return (
     <>
-      <h1 className="text-center mb-4">Best Selling Ever</h1>
+      <h1 className={styles.title}>Best Selling Ever</h1>
       <Swiper
         slidesPerView={5}
         spaceBetween={10}

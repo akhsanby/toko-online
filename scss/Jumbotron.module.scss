@@ -1,14 +1,13 @@
 @import "variables";
 
-.jumbotron_background_image {
-  background-color: $red;
-  border-radius: 0;
-  width: 100%;
-  height: 10vh;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  display: grid;
-  place-content: center;
-  font-family: "Playfair Display";
+.card {
+  margin: 1.5rem 0 1.5rem 0;
+  background-color: $lavender;
+}
+
+.card_text {
+  text-align: center;
+  color: $black;
+  font-weight: 700;
+  font-size: 2.5rem;
 }

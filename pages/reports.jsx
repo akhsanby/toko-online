@@ -4,9 +4,9 @@ import { AdminLayout } from "../components/Layout";
 export default function Reports() {
   return (
     <AdminLayout>
-      <Container className="my-4">
+      <Container className="my-4 font-roboto">
         <h1>Report Of Sales</h1>
-        <Table bordered hover className="my-4">
+        <Table hover className="my-4">
           <thead>
             <tr>
               <th>Name Product</th>

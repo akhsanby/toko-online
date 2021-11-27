@@ -1,7 +1,5 @@
 @import "variables";
-
-.custom_table_head {
-}
+@import "mixins";
 
 .custom_table_body {
   tr {
@@ -18,19 +16,10 @@
 
 .btn_checkout {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 20px;
   button {
-    border-radius: 35px;
-    border: 1px solid $red;
-    background-color: $red;
-    color: $white;
-    padding: 0.5rem 1.5rem;
-    margin-top: 1rem;
-    transition: 0.4s;
-    &:hover {
-      background-color: $dark-red;
-    }
+    @include custom_button($padding: 0.5rem 1rem);
   }
 }
 
