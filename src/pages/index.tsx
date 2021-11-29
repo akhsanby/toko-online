@@ -5,8 +5,9 @@ import _Nav from "../components/_Nav";
 import _CardSlider from "../components/_CardSlider";
 import { Container, Row, Col } from "react-bootstrap";
 import styles from "../scss/Home.module.scss";
+import { NextPage } from "next";
 
-export default function Home() {
+const Home: NextPage = () => {
   return (
     <Layout>
       <Container>
@@ -30,4 +31,6 @@ export default function Home() {
       </Container>
     </Layout>
   );
-}
+};
+
+export default Home;
