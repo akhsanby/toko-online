@@ -1,8 +1,31 @@
+import { useState, SyntheticEvent } from "react";
 import Link from "next/link";
 import { Card, Form } from "react-bootstrap";
 import styles from "../scss/Login.module.scss";
+import { useRouter } from "next/router";
 
 export default function Login() {
+  const { push } = useRouter();
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confPassword, setConfPassword] = useState<string>("");
+
+  const register = (e: SyntheticEvent) => {
+    e.preventDefault();
+    if (password !== confPassword) return alert("password dont match");
+    fetch("https://toko-online-backend.herokuapp.com/user/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    })
+      .then(() => {
+        alert("sukses register");
+        push("/login");
+      })
+      .catch((e) => alert(e.message));
+  };
+
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 font-roboto">
       <Card
@@ -16,10 +39,12 @@ export default function Login() {
               Create your account to get full access
             </Card.Text>
           </div>
-          <Form className="mx-4">
+          <Form onSubmit={(e) => register(e)} className="mx-4">
             <Form.Group className="mb-3">
               <Form.Label className="fw-bold">Full Name</Form.Label>
               <Form.Control
+                onChange={(e) => setName(e.target.value)}
+                value={name}
                 className={styles.form_control}
                 type="text"
                 placeholder="Enter Full Name"
@@ -28,6 +53,8 @@ export default function Login() {
             <Form.Group className="mb-3">
               <Form.Label className="fw-bold">Email Address</Form.Label>
               <Form.Control
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
                 className={styles.form_control}
                 type="text"
                 placeholder="Enter Email Address"
@@ -36,6 +63,8 @@ export default function Login() {
             <Form.Group className="mb-3">
               <Form.Label className="fw-bold">Password</Form.Label>
               <Form.Control
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
                 className={styles.form_control}
                 type="password"
                 placeholder="Enter Password"
@@ -44,6 +73,8 @@ export default function Login() {
             <Form.Group className="mb-3">
               <Form.Label className="fw-bold">Confirm Password</Form.Label>
               <Form.Control
+                onChange={(e) => setConfPassword(e.target.value)}
+                value={confPassword}
                 className={styles.form_control}
                 type="password"
                 placeholder="Confirm Password"
@@ -57,7 +88,7 @@ export default function Login() {
                 </Link>{" "}
                 here
               </div>
-              <button className={styles.custom_btn} type="button">
+              <button className={styles.custom_btn} type="submit">
                 Register
               </button>
             </div>
