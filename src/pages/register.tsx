@@ -1,8 +1,9 @@
 import { useState, SyntheticEvent } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import { Card, Form } from "react-bootstrap";
 import styles from "../scss/Login.module.scss";
-import { useRouter } from "next/router";
+import { signUp } from "@/config/api";
 
 export default function Login() {
   const { push } = useRouter();
@@ -14,11 +15,8 @@ export default function Login() {
   const register = (e: SyntheticEvent) => {
     e.preventDefault();
     if (password !== confPassword) return alert("password dont match");
-    fetch("https://toko-online-backend.herokuapp.com/user/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password }),
-    })
+
+    signUp({ name, email, password })
       .then(() => {
         alert("sukses register");
         push("/login");
