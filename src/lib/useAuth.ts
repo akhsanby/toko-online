@@ -1,8 +1,8 @@
+import { useState, useContext, useCallback } from "react";
 import { _getUser, _signIn, _logout } from "@/config/api";
 import { GlobalState } from "@/pages/_app";
 import { User } from "@/types";
 import { useRouter } from "next/router";
-import { useState, useContext } from "react";
 
 export const useAuthState = () => {
   const defaultUser = { _id: "", name: "", email: "", __v: 0 };
@@ -30,11 +30,11 @@ export const useAuthState = () => {
       .catch((error) => alert(error));
   };
 
-  const getUser = () => {
+  const getUser = useCallback(() => {
     _getUser()
       .then((data: User | any) => setUser(data))
       .catch((error) => alert(error));
-  };
+  }, []);
 
   return { user, login, logout, getUser };
 };

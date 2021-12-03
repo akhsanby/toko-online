@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     authState.getUser();
-  }, []);
+  }, [authState.getUser]);
 
   return (
     <GlobalState.Provider value={value}>
