@@ -38,3 +38,12 @@ export const signIn = (loginData: LoginData) => {
       .catch((e) => reject(e.message));
   });
 };
+
+export const getUser = () => {
+  return new Promise((resolve, reject) => {
+    fetch(`${baseUrl}/user`, { credentials: "include" })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch((e) => reject(e.message));
+  });
+};

@@ -4,20 +4,20 @@ import { useRouter } from "next/router";
 import { Card, Form } from "react-bootstrap";
 import styles from "../scss/Login.module.scss";
 import { SyntheticEvent } from "react-transition-group/node_modules/@types/react";
-import { signIn } from "@/config/api";
+import useAuth from "@/lib/useAuth";
 
 export default function Login() {
-  const { push } = useRouter();
+  const { user, login } = useAuth();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const login = (e: SyntheticEvent) => {
+  const signIn = (e: SyntheticEvent) => {
     e.preventDefault();
-
-    signIn({ email, password })
-      .then(() => push("/"))
-      .catch((e) => alert(e.message));
+    login(email, password);
   };
+
+  console.log(user);
+
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 font-roboto">
       <Card
@@ -31,7 +31,7 @@ export default function Login() {
               Enter Login details to get access
             </Card.Text>
           </div>
-          <Form onSubmit={(e) => login(e)} className="mx-4">
+          <Form onSubmit={(e) => signIn(e)} className="mx-4">
             <Form.Group className="mb-3">
               <Form.Label className="fw-bold">
                 Username Or Email Address
