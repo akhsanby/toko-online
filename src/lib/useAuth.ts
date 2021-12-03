@@ -1,4 +1,4 @@
-import { getUser, signIn, logout as _logout } from "@/config/api";
+import { _getUser, _signIn, _logout } from "@/config/api";
 import { GlobalState } from "@/pages/_app";
 import { User } from "@/types";
 import { useRouter } from "next/router";
@@ -12,9 +12,9 @@ export const useAuthState = () => {
 
   const login = async (email: string, password: string) => {
     try {
-      await signIn({ email, password });
+      await _signIn({ email, password });
 
-      const data: User | any = await getUser();
+      const data: User | any = await _getUser();
 
       setUser(data);
 
@@ -31,7 +31,7 @@ export const useAuthState = () => {
   };
 
   const refreshUser = () => {
-    getUser()
+    _getUser()
       .then((data: User | any) => setUser(data))
       .catch((error) => alert(error));
   };

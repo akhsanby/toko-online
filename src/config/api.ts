@@ -11,7 +11,7 @@ interface LoginData {
   password: string;
 }
 
-export const signUp = (registerData: RegisterData) => {
+export const _signUp = (registerData: RegisterData) => {
   return new Promise((resolve, reject) => {
     fetch(`${baseUrl}/user/register`, {
       method: "POST",
@@ -24,7 +24,7 @@ export const signUp = (registerData: RegisterData) => {
   });
 };
 
-export const signIn = (loginData: LoginData) => {
+export const _signIn = (loginData: LoginData) => {
   return new Promise((resolve, reject) => {
     fetch(`${baseUrl}/user/login`, {
       mode: "cors",
@@ -39,7 +39,7 @@ export const signIn = (loginData: LoginData) => {
   });
 };
 
-export const logout = () => {
+export const _logout = () => {
   return new Promise((resolve, reject) => {
     fetch(`${baseUrl}/user/logout`, {
       mode: "cors",
@@ -53,7 +53,7 @@ export const logout = () => {
   });
 };
 
-export const getUser = () => {
+export const _getUser = () => {
   return new Promise((resolve, reject) => {
     fetch(`${baseUrl}/user`, { credentials: "include" })
       .then((response) => response.json())
