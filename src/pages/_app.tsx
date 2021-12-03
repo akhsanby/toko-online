@@ -1,18 +1,20 @@
 import { createContext, useEffect } from "react";
 import { AppProps } from "next/dist/shared/lib/router/router";
 import { useAuthState } from "@/lib/useAuth";
-import "../scss/main.scss";
+import { useProductState } from "@/lib/useProduct";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import "../scss/main.scss";
 
 export const GlobalState: any = createContext({});
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const auth = useAuthState();
+  const authState = useAuthState();
+  const productState = useProductState();
 
-  const value = { ...auth };
+  const value = { ...authState, ...productState };
 
   useEffect(() => {
-    auth.getUser();
+    authState.getUser();
   }, []);
 
   return (

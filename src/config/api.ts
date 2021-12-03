@@ -61,3 +61,12 @@ export const _getUser = () => {
       .catch((e) => reject(e.message));
   });
 };
+
+export const _getProducts = () => {
+  return new Promise((resolve, reject) => {
+    fetch(`${baseUrl}/product`)
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch((e) => reject(e.message));
+  });
+};

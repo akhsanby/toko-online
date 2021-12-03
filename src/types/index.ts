@@ -4,3 +4,17 @@ export interface User {
   email: string;
   __v: number;
 }
+
+export interface Product {
+  _id: string;
+  name: string;
+  price: number;
+  stock: number;
+  category: string;
+  image: string;
+  description: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+}
