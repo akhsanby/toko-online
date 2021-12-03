@@ -13,7 +13,7 @@ import useAuth from "@/lib/useAuth";
 
 export default function _Navbar() {
   const { logout, user } = useAuth();
-  console.log(user)
+
   return (
     <div>
       <Navbar expand="sm" className={styles.custom_navbar_1}>

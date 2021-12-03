@@ -30,13 +30,13 @@ export const useAuthState = () => {
       .catch((error) => alert(error));
   };
 
-  const refreshUser = () => {
+  const getUser = () => {
     _getUser()
       .then((data: User | any) => setUser(data))
       .catch((error) => alert(error));
   };
 
-  return { user, login, logout, refreshUser };
+  return { user, login, logout, getUser };
 };
 
 export default function useAuth() {

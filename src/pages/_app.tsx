@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const value = { ...auth };
 
   useEffect(() => {
-    auth.refreshUser();
+    auth.getUser();
   }, []);
 
   return (
