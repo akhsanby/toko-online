@@ -39,6 +39,20 @@ export const signIn = (loginData: LoginData) => {
   });
 };
 
+export const logout = () => {
+  return new Promise((resolve, reject) => {
+    fetch(`${baseUrl}/user/logout`, {
+      mode: "cors",
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((result) => resolve(result))
+      .catch((e) => reject(e.message));
+  });
+};
+
 export const getUser = () => {
   return new Promise((resolve, reject) => {
     fetch(`${baseUrl}/user`, { credentials: "include" })

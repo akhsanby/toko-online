@@ -1,12 +1,14 @@
-import { getUser, signIn } from "@/config/api";
+import { getUser, signIn, logout as _logout } from "@/config/api";
 import { GlobalState } from "@/pages/_app";
 import { User } from "@/types";
 import { useRouter } from "next/router";
 import { useState, useContext } from "react";
 
 export const useAuthState = () => {
+  const defaultUser = { _id: "", name: "", email: "", __v: 0 };
+
   const { push } = useRouter();
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<User>(defaultUser);
 
   const login = async (email: string, password: string) => {
     try {
@@ -22,16 +24,22 @@ export const useAuthState = () => {
     }
   };
 
+  const logout = () => {
+    _logout()
+      .then(() => setUser(defaultUser))
+      .catch((error) => alert(error));
+  };
+
   const refreshUser = () => {
     getUser()
       .then((data: User | any) => setUser(data))
       .catch((error) => alert(error));
   };
 
-  return { user, login, refreshUser };
+  return { user, login, logout, refreshUser };
 };
 
 export default function useAuth() {
-  const { user, login, refreshUser } = useContext(GlobalState);
-  return { user, login, refreshUser };
+  const { user, login, refreshUser, logout } = useContext(GlobalState);
+  return { user, login, refreshUser, logout };
 }

@@ -9,8 +9,11 @@ import {
 } from "react-bootstrap";
 import Link from "next/link";
 import styles from "../scss/Navbar.module.scss";
+import useAuth from "@/lib/useAuth";
 
 export default function _Navbar() {
+  const { logout, user } = useAuth();
+  console.log(user)
   return (
     <div>
       <Navbar expand="sm" className={styles.custom_navbar_1}>
@@ -32,9 +35,15 @@ export default function _Navbar() {
                 </i>
               </a>
             </Link>
-            <Link href="/login">
-              <button className={styles.custom_btn_style}>Sign in</button>
-            </Link>
+            {!user._id ? (
+              <Link href="/login">
+                <button className={styles.custom_btn_style}>Sign in</button>
+              </Link>
+            ) : (
+              <button onClick={logout} className={styles.custom_btn_style}>
+                Logout
+              </button>
+            )}
           </Nav>
         </Container>
       </Navbar>
