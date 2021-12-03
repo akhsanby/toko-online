@@ -1,4 +1,5 @@
 import { Product } from "@/types";
+import { useRouter } from "next/router";
 import { Card, Row, Col } from "react-bootstrap";
 import styles from "../scss/Card.module.scss";
 
@@ -7,8 +8,9 @@ interface _CardProps {
 }
 
 export default function _Card({ product }: _CardProps) {
+  const { push } = useRouter();
   return (
-    <Card className={styles.card}>
+    <Card onClick={() => push(`/${product._id}`)} className={styles.card}>
       <Card.Img variant="top" src={product.image} />
       <Card.Body className={styles.card_body}>
         <Card.Title className="fw-bold fs-4">{product.name}</Card.Title>

@@ -70,3 +70,12 @@ export const _getProducts = () => {
       .catch((e) => reject(e.message));
   });
 };
+
+export const _getProduct = (productId: string) => {
+  return new Promise((resolve, reject) => {
+    fetch(`${baseUrl}/product/${productId}`)
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch((e) => reject(e.message));
+  });
+};
