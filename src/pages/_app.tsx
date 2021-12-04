@@ -1,21 +1,21 @@
 import { createContext, useEffect } from "react";
-import { AppProps } from "next/dist/shared/lib/router/router";
-import { useAuthState } from "@/lib/useAuth";
-import { useProductState } from "@/lib/useProduct";
+import { AppProps } from "next/app";
+import { useAuthReducer } from "@/lib/useAuth";
+import { useProductReducer } from "@/lib/useProduct";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import "../scss/main.scss";
+import "@/scss/main.scss";
 
 export const GlobalState: any = createContext({});
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const authState = useAuthState();
-  const productState = useProductState();
+  const authReducer = useAuthReducer();
+  const productReducer = useProductReducer();
 
-  const value = { ...authState, ...productState };
+  const value = { ...authReducer, ...productReducer };
 
   useEffect(() => {
-    authState.getUser();
-  }, [authState.getUser]);
+    authReducer.getUser();
+  }, [authReducer.getUser]);
 
   return (
     <GlobalState.Provider value={value}>

@@ -3,7 +3,7 @@ import { _getProducts, _getProduct } from "@/config/api";
 import { GlobalState } from "@/pages/_app";
 import { Product } from "@/types";
 
-export const useProductState = () => {
+export const useProductReducer = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [product, setProduct] = useState<Product | {}>({});
 

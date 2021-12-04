@@ -4,7 +4,7 @@ import { GlobalState } from "@/pages/_app";
 import { User } from "@/types";
 import { useRouter } from "next/router";
 
-export const useAuthState = () => {
+export const useAuthReducer = () => {
   const { push } = useRouter();
   const [user, setUser] = useState<User | {}>({});
 
