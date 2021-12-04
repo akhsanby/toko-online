@@ -11,10 +11,11 @@ import useProduct from "@/lib/useProduct";
 import { Product } from "@/types";
 
 const Home: NextPage = () => {
-  const { getProducts, products } = useProduct();
+  const { getProducts, products, cleanUpProducts } = useProduct();
 
   useEffect(() => {
     getProducts();
+    return cleanUpProducts;
   }, [getProducts]);
 
   return (
@@ -35,9 +36,9 @@ const Home: NextPage = () => {
               ))}
           </Row>
         </div>
-        <div className="my-4 d-flex justify-content-center">
+        {/* <div className="my-4 d-flex justify-content-center">
           <button className={styles.custom_btn}>Browse More</button>
-        </div>
+        </div> */}
       </Container>
     </Layout>
   );

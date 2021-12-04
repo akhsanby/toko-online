@@ -9,15 +9,17 @@ import { Product } from "@/types";
 
 interface UseProduct {
   getProduct: Function;
+  cleanUpProduct: Function;
   product: Product;
 }
 
 export default function DetailProduct() {
   const { query } = useRouter();
-  const { getProduct, product }: UseProduct = useProduct();
+  const { getProduct, product, cleanUpProduct }: UseProduct = useProduct();
 
-  useEffect(() => {
+  useEffect((): any => {
     if (query.detail) getProduct(query.detail);
+    return cleanUpProduct;
   }, [getProduct, query]);
 
   return (

@@ -13,17 +13,45 @@ export const useProductState = () => {
       .catch((e) => alert(e));
   }, []);
 
-  const getProducts = useCallback(() => {
+  const getProducts = useCallback((q) => {
     _getProducts()
-      .then((data: Product[] | any) => setProducts(data))
+      .then((data: Product[] | any) => {
+        let result = data;
+        if (q) result = data.filter((el: Product) => el.category === q);
+        setProducts(result);
+      })
       .catch((e) => alert(e));
   }, []);
 
-  return { products, getProducts, getProduct, product };
+  const cleanUpProduct = () => setProduct({});
+
+  const cleanUpProducts = () => setProducts([]);
+
+  return {
+    products,
+    getProducts,
+    getProduct,
+    product,
+    cleanUpProduct,
+    cleanUpProducts,
+  };
 };
 
 export default function useProduct() {
-  const { products, product, getProducts, getProduct } =
-    useContext(GlobalState);
-  return { products, product, getProducts, getProduct };
+  const {
+    products,
+    product,
+    getProducts,
+    getProduct,
+    cleanUpProduct,
+    cleanUpProducts,
+  } = useContext(GlobalState);
+  return {
+    products,
+    product,
+    getProducts,
+    getProduct,
+    cleanUpProduct,
+    cleanUpProducts,
+  };
 }

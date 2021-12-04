@@ -5,10 +5,8 @@ import { User } from "@/types";
 import { useRouter } from "next/router";
 
 export const useAuthState = () => {
-  const defaultUser = { _id: "", name: "", email: "", __v: 0 };
-
   const { push } = useRouter();
-  const [user, setUser] = useState<User>(defaultUser);
+  const [user, setUser] = useState<User | {}>({});
 
   const login = async (email: string, password: string) => {
     try {
@@ -26,7 +24,7 @@ export const useAuthState = () => {
 
   const logout = () => {
     _logout()
-      .then(() => setUser(defaultUser))
+      .then(() => setUser({}))
       .catch((error) => alert(error));
   };
 

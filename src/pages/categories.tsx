@@ -3,8 +3,20 @@ import _Jumbotron from "../components/_Jumbotron";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import _Card from "../components/_Card";
 import styles from "../scss/Categories.module.scss";
+import { useEffect } from "react";
+import useProduct from "@/lib/useProduct";
+import { Product } from "@/types";
+import { useRouter } from "next/router";
 
 export default function Categories() {
+  const { getProducts, products, cleanUpProducts } = useProduct();
+  const { query } = useRouter();
+
+  useEffect(() => {
+    if (query) getProducts(query.q);
+    return cleanUpProducts;
+  }, [getProducts, query]);
+
   return (
     <Layout>
       <Container>
@@ -72,17 +84,17 @@ export default function Categories() {
           </Col>
           <Col lg={8}>
             <Row>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
-                <Col className="mb-4" key={i} lg={3} md={4} xs={6}>
-                  <_Card />
+              {products.map((product: Product) => (
+                <Col className="mb-4" key={product._id} lg={3} md={4} xs={6}>
+                  <_Card product={product} />
                 </Col>
               ))}
             </Row>
-            <div className="text-center">
+            {/* <div className="text-center">
               <button type="button" className={styles.btn_custom}>
                 Browse More
               </button>
-            </div>
+            </div> */}
           </Col>
         </Row>
       </Container>

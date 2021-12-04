@@ -53,11 +53,11 @@ export default function _Navbar() {
             <Link href="/">
               <a className="nav-link">Home</a>
             </Link>
-            <Link href={{ pathname: "/categories", query: { q: "women" } }}>
-              <a className="nav-link">Women's</a>
+            <Link href={{ pathname: "/categories", query: { q: "women's clothing" } }}>
+              <a className="nav-link">Women's clothing</a>
             </Link>
-            <Link href={{ pathname: "/categories", query: { q: "men" } }}>
-              <a className="nav-link">Men's</a>
+            <Link href={{ pathname: "/categories", query: { q: "men's clothing" } }}>
+              <a className="nav-link">Men's clothing</a>
             </Link>
             <Link
               href={{ pathname: "/categories", query: { q: "electronics" } }}
