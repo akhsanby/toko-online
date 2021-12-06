@@ -17,14 +17,18 @@ export default function useAuth() {
 
   useEffect(() => {
     const getUser = async () => {
-      const data: any = await _getUser();
-      if (data.e) console.log(data.e);
-      if (data.error) {
-        console.log(data.error);
-        return;
+      try {
+        const data: any = await _getUser();
+        if (data.e) console.log(data.e);
+        if (data.error) {
+          console.log(data.error);
+          return;
+        }
+        setUser(data);
+        setAuthentic(true);
+      } catch (error) {
+        console.log(error);
       }
-      setUser(data);
-      setAuthentic(true);
     };
     if (!isAuthentic) getUser();
   }, []);
@@ -34,6 +38,7 @@ export default function useAuth() {
       const { error, e }: any = await _logout();
       if (e) console.log(e);
       if (error) return alert(error);
+
       setUser({});
       setAuthentic(false);
     } catch (error) {
@@ -44,18 +49,20 @@ export default function useAuth() {
   const login = async (event: SyntheticEvent, data: LoginData) => {
     event.preventDefault();
 
-    const { e, error }: any = await _signIn(data);
+    try {
+      const { e, error }: any = await _signIn(data);
+      if (e) console.log(e);
+      if (error) return alert(error);
 
-    if (e) console.log(e);
-    if (error) return alert(error);
+      const result: any = await _getUser();
+      if (result.e) console.log(result.e);
+      if (result.error) return alert(result.error);
 
-    const result: any = await _getUser();
-
-    if (result.e) console.log(result.e);
-    if (result.error) return alert(result.error);
-
-    setUser(result);
-    push("/");
+      setUser(result);
+      push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return { user, isAuthentic, logout, login };

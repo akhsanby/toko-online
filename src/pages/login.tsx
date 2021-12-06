@@ -1,4 +1,4 @@
-import { useState, SyntheticEvent } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Card, Form } from "react-bootstrap";
 import styles from "@/scss/Login.module.scss";
@@ -8,7 +8,7 @@ import { NextPage } from "next";
 import useAuth from "@/lib/useAuth";
 
 const Login: NextPage = () => {
-  const { push, replace } = useRouter();
+  const { replace } = useRouter();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
