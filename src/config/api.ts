@@ -20,7 +20,7 @@ export const _signUp = (registerData: RegisterData) => {
     })
       .then((response) => response.json())
       .then((result) => resolve(result))
-      .catch((e) => reject(e.message));
+      .catch((e) => reject(e));
   });
 };
 
@@ -35,7 +35,7 @@ export const _signIn = (loginData: LoginData) => {
     })
       .then((response) => response.json())
       .then((result) => resolve(result))
-      .catch((e) => reject(e.message));
+      .catch((e) => reject(e));
   });
 };
 
@@ -49,7 +49,7 @@ export const _logout = () => {
     })
       .then((response) => response.json())
       .then((result) => resolve(result))
-      .catch((e) => reject(e.message));
+      .catch((e) => reject(e));
   });
 };
 
@@ -58,7 +58,7 @@ export const _getUser = () => {
     fetch(`${baseUrl}/user`, { credentials: "include" })
       .then((response) => response.json())
       .then((data) => resolve(data))
-      .catch((e) => reject(e.message));
+      .catch((e) => reject(e));
   });
 };
 
@@ -70,15 +70,15 @@ export const _getProducts = (query?: string) => {
     fetch(URL)
       .then((response) => response.json())
       .then((data) => resolve(data))
-      .catch((e) => reject(e.message));
+      .catch((e) => reject(e));
   });
 };
 
-export const _getProduct = (productId: string) => {
+export const _getCart = () => {
   return new Promise((resolve, reject) => {
-    fetch(`${baseUrl}/product/${productId}`)
+    fetch(`${baseUrl}/cart/`, { credentials: "include" })
       .then((response) => response.json())
       .then((data) => resolve(data))
-      .catch((e) => reject(e.message));
+      .catch((e) => reject(e));
   });
 };

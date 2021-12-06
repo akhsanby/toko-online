@@ -12,22 +12,23 @@ const Login: NextPage = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const { user } = useGlobalState();
+  const { user, setUser } = useGlobalState();
   if (user._id) replace("/");
 
   const signIn = async (event: SyntheticEvent) => {
     event.preventDefault();
 
-    const signInData: any = await _signIn({ email, password });
-
-    if (signInData.e) console.log(signInData.e);
-    if (signInData.error) return alert(signInData.error);
-
-    const { error, e }: any = await _getUser();
+    const { e, error }: any = await _signIn({ email, password });
 
     if (e) console.log(e);
     if (error) return alert(error);
 
+    const data: any = await _getUser();
+
+    if (data.e) console.log(data.e);
+    if (data.error) return alert(data.error);
+
+    setUser(data);
     push("/");
   };
 

@@ -13,11 +13,15 @@ import { _logout } from "@/config/api";
 import { useGlobalState } from "@/pages/_app";
 
 export default function _Navbar() {
-  const { user } = useGlobalState();
-  const logout = () => {
-    _logout();
-    // .then(() => setUser({}))
-    // .catch((error) => alert(error));
+  const { user, setUser } = useGlobalState();
+
+  const logout = async () => {
+    const { error, e }: any = await _logout();
+
+    if (e) console.log(e);
+    if (error) return alert(error);
+
+    setUser({});
   };
 
   return (
