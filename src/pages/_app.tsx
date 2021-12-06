@@ -8,7 +8,7 @@ import {
 } from "react";
 import { AppProps } from "next/app";
 import { _getCart, _getUser } from "@/config/api";
-import { User } from "@/types";
+import { CartItem, User } from "@/types";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "@/scss/main.scss";
 
@@ -16,7 +16,7 @@ const GlobalState = createContext({});
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [user, setUser] = useState<User | {}>({});
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState<CartItem[]>([]);
 
   const value = { user, setUser, cart, setCart };
 
