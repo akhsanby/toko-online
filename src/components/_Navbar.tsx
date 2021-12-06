@@ -10,19 +10,10 @@ import {
 import Link from "next/link";
 import styles from "../scss/Navbar.module.scss";
 import { _logout } from "@/config/api";
-import { useGlobalState } from "@/pages/_app";
+import useAuth from "@/lib/useAuth";
 
 export default function _Navbar() {
-  const { user, setUser } = useGlobalState();
-
-  const logout = async () => {
-    const { error, e }: any = await _logout();
-
-    if (e) console.log(e);
-    if (error) return alert(error);
-
-    setUser({});
-  };
+  const { isAuthentic, logout } = useAuth();
 
   return (
     <div>
@@ -45,7 +36,7 @@ export default function _Navbar() {
                 </i>
               </a>
             </Link>
-            {!user._id ? (
+            {!isAuthentic ? (
               <Link href="/login">
                 <button className={styles.custom_btn_style}>Sign in</button>
               </Link>

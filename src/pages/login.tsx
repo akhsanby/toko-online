@@ -5,32 +5,16 @@ import styles from "@/scss/Login.module.scss";
 import { useRouter } from "next/router";
 import { _getUser, _signIn } from "@/config/api";
 import { NextPage } from "next";
-import { useGlobalState } from "./_app";
+import useAuth from "@/lib/useAuth";
 
 const Login: NextPage = () => {
   const { push, replace } = useRouter();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const { user, setUser } = useGlobalState();
-  if (user._id) replace("/");
+  const { isAuthentic, login } = useAuth();
 
-  const signIn = async (event: SyntheticEvent) => {
-    event.preventDefault();
-
-    const { e, error }: any = await _signIn({ email, password });
-
-    if (e) console.log(e);
-    if (error) return alert(error);
-
-    const data: any = await _getUser();
-
-    if (data.e) console.log(data.e);
-    if (data.error) return alert(data.error);
-
-    setUser(data);
-    push("/");
-  };
+  if (isAuthentic) replace("/");
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 font-roboto">
@@ -45,7 +29,10 @@ const Login: NextPage = () => {
               Enter Login details to get access
             </Card.Text>
           </div>
-          <Form onSubmit={(e) => signIn(e)} className="mx-4">
+          <Form
+            onSubmit={(e) => login(e, { email, password })}
+            className="mx-4"
+          >
             <Form.Group className="mb-3">
               <Form.Label className="fw-bold">
                 Username Or Email Address

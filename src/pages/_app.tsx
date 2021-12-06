@@ -21,19 +21,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   const value = { user, setUser, cart, setCart };
 
   useEffect(() => {
-    const getUser = async () => {
-      const data: any = await _getUser();
-      if (data.e) console.log(data.e);
-      if (data.error) {
-        console.log(data.error);
-        return;
-      }
-      setUser(data);
-    };
-    getUser();
-  }, []);
-
-  useEffect(() => {
     const getCart = async () => {
       const data: any = await _getCart();
       if (data.e) console.log(data.e);
