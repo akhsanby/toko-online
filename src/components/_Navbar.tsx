@@ -11,9 +11,11 @@ import Link from "next/link";
 import styles from "../scss/Navbar.module.scss";
 import { _logout } from "@/config/api";
 import useAuth from "@/lib/useAuth";
+import useCart from "@/lib/useCart";
 
 export default function _Navbar() {
   const { isAuthentic, logout } = useAuth();
+  const { cart } = useCart();
 
   return (
     <div>
@@ -31,7 +33,7 @@ export default function _Navbar() {
               <a className="nav-link">
                 <i className="bi bi-cart p-0 position-relative">
                   <span className="bg-red position-absolute top-0 start-100 fs-7 translate-middle badge rounded-pill">
-                    0
+                    {cart.length}
                   </span>
                 </i>
               </a>

@@ -1,4 +1,4 @@
-const baseUrl = "https://toko-online-backend.herokuapp.com";
+const baseUrl = "toko-online-backend.herokuapp.com";
 
 interface RegisterData {
   name: string;
@@ -13,7 +13,7 @@ interface LoginData {
 
 export const _signUp = (registerData: RegisterData) => {
   return new Promise((resolve, reject) => {
-    fetch(`${baseUrl}/user/register`, {
+    fetch(`https://${baseUrl}/user/register`, {
       method: "POST",
       body: JSON.stringify(registerData),
       headers: { "Content-Type": "application/json" },
@@ -26,7 +26,7 @@ export const _signUp = (registerData: RegisterData) => {
 
 export const _signIn = (loginData: LoginData) => {
   return new Promise((resolve, reject) => {
-    fetch(`${baseUrl}/user/login`, {
+    fetch(`https://${baseUrl}/user/login`, {
       mode: "cors",
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -41,7 +41,7 @@ export const _signIn = (loginData: LoginData) => {
 
 export const _logout = () => {
   return new Promise((resolve, reject) => {
-    fetch(`${baseUrl}/user/logout`, {
+    fetch(`https://${baseUrl}/user/logout`, {
       mode: "cors",
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -55,7 +55,7 @@ export const _logout = () => {
 
 export const _getUser = () => {
   return new Promise((resolve, reject) => {
-    fetch(`${baseUrl}/user`, { credentials: "include" })
+    fetch(`https://${baseUrl}/user`, { credentials: "include" })
       .then((response) => response.json())
       .then((data) => resolve(data))
       .catch((e) => reject(e));
@@ -63,7 +63,7 @@ export const _getUser = () => {
 };
 
 export const _getProducts = (query?: string) => {
-  let URL = `${baseUrl}/product`;
+  let URL = `https://${baseUrl}/product`;
   if (query) URL += `?category=${query}`;
 
   return new Promise((resolve, reject) => {
@@ -76,7 +76,7 @@ export const _getProducts = (query?: string) => {
 
 export const _getCart = () => {
   return new Promise((resolve, reject) => {
-    fetch(`${baseUrl}/cart/`, { credentials: "include" })
+    fetch(`https://${baseUrl}/cart/`, { credentials: "include" })
       .then((response) => response.json())
       .then((data) => resolve(data))
       .catch((e) => reject(e));

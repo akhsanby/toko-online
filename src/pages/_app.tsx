@@ -1,5 +1,4 @@
 import {
-  useEffect,
   useContext,
   createContext,
   useState,
@@ -15,23 +14,11 @@ import "@/scss/main.scss";
 const GlobalState = createContext({});
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [isAuthentic, setAuthentic] = useState<boolean>(false);
   const [user, setUser] = useState<User | {}>({});
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  const value = { user, setUser, cart, setCart };
-
-  useEffect(() => {
-    const getCart = async () => {
-      const data: any = await _getCart();
-      if (data.e) console.log(data.e);
-      if (data.error) {
-        console.log(data.error);
-        return;
-      }
-      setCart(data);
-    };
-    getCart();
-  }, []);
+  const value = { user, setUser, cart, setCart, isAuthentic, setAuthentic };
 
   return (
     <GlobalState.Provider value={value}>
@@ -48,7 +35,6 @@ interface UseGLobalState {
 }
 
 export const useGlobalState = () => {
-  const { user, setUser, setCart, cart }: UseGLobalState | any =
-    useContext(GlobalState);
-  return { user, setUser, setCart, cart };
+  const { user, setUser, setCart, cart,isAuthentic, setAuthentic }: UseGLobalState | any = useContext(GlobalState);
+  return { user, setUser, setCart, cart,isAuthentic, setAuthentic };
 };

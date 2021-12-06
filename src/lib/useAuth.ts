@@ -6,14 +6,11 @@ import { useEffect, useState, SyntheticEvent } from "react";
 interface LoginData {
   email: string;
   password: string;
-  error?: string;
-  e?: any;
 }
 
 export default function useAuth() {
   const { push } = useRouter();
-  const { user, setUser } = useGlobalState();
-  const [isAuthentic, setAuthentic] = useState<boolean>(false);
+  const { user, setUser, isAuthentic, setAuthentic } = useGlobalState();
 
   useEffect(() => {
     const getUser = async () => {
