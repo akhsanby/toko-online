@@ -11,7 +11,16 @@ import { CartItem, User } from "@/types";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "@/scss/main.scss";
 
-const GlobalState = createContext({});
+interface GLobalStateType {
+  user: User | {};
+  cart: CartItem[];
+  isAuthentic: boolean;
+  setUser: Dispatch<SetStateAction<{} | User>>;
+  setCart: Dispatch<SetStateAction<CartItem[]>>;
+  setAuthentic: Dispatch<SetStateAction<boolean>>;
+}
+
+const GlobalState: any = createContext<Partial<GLobalStateType | {}>>({});
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isAuthentic, setAuthentic] = useState<boolean>(false);
@@ -29,12 +38,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 export default MyApp;
 
-interface UseGLobalState {
-  user: User | {};
-  setUser: Dispatch<SetStateAction<{} | User>>;
-}
-
 export const useGlobalState = () => {
-  const { user, setUser, setCart, cart,isAuthentic, setAuthentic }: UseGLobalState | any = useContext(GlobalState);
-  return { user, setUser, setCart, cart,isAuthentic, setAuthentic };
+  const data: GLobalStateType = useContext(GlobalState);
+  const { user, setUser, setCart, cart, isAuthentic, setAuthentic } = data;
+  return { user, setUser, setCart, cart, isAuthentic, setAuthentic };
 };
