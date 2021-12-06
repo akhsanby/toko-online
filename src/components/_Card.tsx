@@ -24,7 +24,7 @@ export default function _Card({ product }: _CardProps) {
             <span>{product.rating.rate}</span>
           </Col>
           <Col>
-            <span className="text-red">{product.rating.count}</span> reviews
+            <span className="text-red">{product.sold}</span> sold
           </Col>
         </Row>
       </Card.Body>

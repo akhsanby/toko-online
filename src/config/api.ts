@@ -62,9 +62,12 @@ export const _getUser = () => {
   });
 };
 
-export const _getProducts = () => {
+export const _getProducts = (query?: string) => {
+  let URL = `${baseUrl}/product`;
+  if (query) URL += `?category=${query}`;
+
   return new Promise((resolve, reject) => {
-    fetch(`${baseUrl}/product`)
+    fetch(URL)
       .then((response) => response.json())
       .then((data) => resolve(data))
       .catch((e) => reject(e.message));

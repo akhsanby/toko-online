@@ -1,22 +1,35 @@
-import { useState } from "react";
+import { useState, SyntheticEvent } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { Card, Form } from "react-bootstrap";
-import styles from "../scss/Login.module.scss";
-import { SyntheticEvent } from "react-transition-group/node_modules/@types/react";
-import useAuth from "@/lib/useAuth";
+import styles from "@/scss/Login.module.scss";
+import { useRouter } from "next/router";
+import { _getUser, _signIn } from "@/config/api";
+import { NextPage } from "next";
+import { useGlobalState } from "./_app";
 
-export default function Login() {
-  const { user, login } = useAuth();
+const Login: NextPage = () => {
+  const { push, replace } = useRouter();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const signIn = (e: SyntheticEvent) => {
-    e.preventDefault();
-    login(email, password);
-  };
+  const { user } = useGlobalState();
+  if (user._id) replace("/");
 
-  console.log(user);
+  const signIn = async (event: SyntheticEvent) => {
+    event.preventDefault();
+
+    const signInData: any = await _signIn({ email, password });
+
+    if (signInData.e) console.log(signInData.e);
+    if (signInData.error) return alert(signInData.error);
+
+    const { error, e }: any = await _getUser();
+
+    if (e) console.log(e);
+    if (error) return alert(error);
+
+    push("/");
+  };
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 font-roboto">
@@ -83,4 +96,6 @@ export default function Login() {
       </Card>
     </div>
   );
-}
+};
+
+export default Login;

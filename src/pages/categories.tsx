@@ -3,19 +3,19 @@ import _Jumbotron from "../components/_Jumbotron";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import _Card from "../components/_Card";
 import styles from "../scss/Categories.module.scss";
-import { useEffect } from "react";
-import useProduct from "@/lib/useProduct";
 import { Product } from "@/types";
-import { useRouter } from "next/router";
+import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
+import { _getProducts } from "@/config/api";
 
-export default function Categories() {
-  const { getProducts, products, cleanUpProducts } = useProduct();
-  const { query } = useRouter();
+interface CategoriesProps {
+  products: Product[];
+  error?: string;
+  e?: any;
+}
 
-  useEffect(() => {
-    if (query) getProducts(query.q);
-    return cleanUpProducts;
-  }, [getProducts, query]);
+const Categories: NextPage<CategoriesProps> = ({ products, error, e }) => {
+  if (error) alert(error);
+  if (e) console.log(e);
 
   return (
     <Layout>
@@ -100,4 +100,19 @@ export default function Categories() {
       </Container>
     </Layout>
   );
-}
+};
+
+export default Categories;
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext
+) => {
+  const { q }: any | { q: string } = ctx.query;
+
+  const data: any = await _getProducts(q);
+
+  if (data.error)
+    return { props: { products: [], error: data.error, e: data.e || "" } };
+
+  return { props: { products: data } };
+};

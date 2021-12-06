@@ -2,25 +2,17 @@ import Image from "next/image";
 import { Layout } from "../components/Layout";
 import styles from "../scss/DetailProduct.module.scss";
 import { Container, Card, Row, Col, Nav, InputGroup } from "react-bootstrap";
-import useProduct from "@/lib/useProduct";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 import { Product } from "@/types";
+import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
+import { _getProduct } from "@/config/api";
 
-interface UseProduct {
-  getProduct: Function;
-  cleanUpProduct: Function;
+interface DetailProductProps {
+  message?: string;
   product: Product;
 }
 
-export default function DetailProduct() {
-  const { query } = useRouter();
-  const { getProduct, product, cleanUpProduct }: UseProduct = useProduct();
-
-  useEffect((): any => {
-    if (query.detail) getProduct(query.detail);
-    return cleanUpProduct;
-  }, [getProduct, query]);
+const DetailProduct: NextPage<DetailProductProps> = ({ message, product }) => {
+  if (message) alert(message);
 
   return (
     <Layout>
@@ -77,4 +69,19 @@ export default function DetailProduct() {
       </Container>
     </Layout>
   );
-}
+};
+
+export default DetailProduct;
+
+export const getServerSideProps:GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const { detail }: any = ctx.params;
+
+  try {
+    const data:any = await _getProduct(detail)
+
+    return { props: { product: data } };
+  } catch (e) {
+    const { message }: any = e;
+    return { props: { product: [], message } };
+  }
+};

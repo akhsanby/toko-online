@@ -3,25 +3,32 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Card, Form } from "react-bootstrap";
 import styles from "../scss/Login.module.scss";
-import { signUp } from "@/config/api";
+import { _signUp } from "@/config/api";
+import { useGlobalState } from "./_app";
+import { NextPage } from "next";
 
-export default function Login() {
-  const { push } = useRouter();
+const Register: NextPage = () => {
+  const { push, replace } = useRouter();
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confPassword, setConfPassword] = useState<string>("");
 
-  const register = (e: SyntheticEvent) => {
-    e.preventDefault();
+  const { user } = useGlobalState();
+  if (user._id) replace("/");
+
+  const register = async (event: SyntheticEvent) => {
+    event.preventDefault();
+
     if (password !== confPassword) return alert("password dont match");
 
-    signUp({ name, email, password })
-      .then(() => {
-        alert("sukses register");
-        push("/login");
-      })
-      .catch((e) => alert(e.message));
+    const { e, error }: any = await _signUp({ name, email, password });
+
+    if (e) console.log(e);
+    if (error) return alert(error);
+
+    alert("regiter success");
+    push("/login");
   };
 
   return (
@@ -95,4 +102,6 @@ export default function Login() {
       </Card>
     </div>
   );
-}
+};
+
+export default Register;

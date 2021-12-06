@@ -1,21 +1,36 @@
-import { createContext, useEffect } from "react";
+import {
+  useEffect,
+  useContext,
+  createContext,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { AppProps } from "next/app";
-import { useAuthReducer } from "@/lib/useAuth";
-import { useProductReducer } from "@/lib/useProduct";
+import { _getUser } from "@/config/api";
+import { User } from "@/types";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "@/scss/main.scss";
 
-export const GlobalState: any = createContext({});
+const GlobalState = createContext({});
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const authReducer = useAuthReducer();
-  const productReducer = useProductReducer();
-
-  const value = { ...authReducer, ...productReducer };
+  const [user, setUser] = useState<User | {}>({});
+  const value = { user, setUser };
 
   useEffect(() => {
-    authReducer.getUser();
-  }, [authReducer.getUser]);
+    const getUser = async () => {
+      const data: any = await _getUser();
+
+      if (data.e) console.log(data.e);
+      if (data.error) {
+        console.log(data.error);
+        return;
+      }
+      setUser(data);
+    };
+    getUser();
+  }, []);
 
   return (
     <GlobalState.Provider value={value}>
@@ -25,3 +40,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp;
+
+interface UseGLobalState {
+  user: User | {};
+  setUser: Dispatch<SetStateAction<{} | User>>;
+}
+
+export const useGlobalState = () => {
+  const { user, setUser }: UseGLobalState | any = useContext(GlobalState);
+  return { user, setUser };
+};

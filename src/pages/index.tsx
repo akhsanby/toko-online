@@ -5,25 +5,26 @@ import _Nav from "../components/_Nav";
 import _CardSlider from "../components/_CardSlider";
 import { Container, Row, Col } from "react-bootstrap";
 import styles from "../scss/Home.module.scss";
-import { NextPage } from "next";
-import { useEffect } from "react";
-import useProduct from "@/lib/useProduct";
+import { GetServerSideProps, NextPage } from "next";
 import { Product } from "@/types";
+import { _getProducts } from "@/config/api";
 
-const Home: NextPage = () => {
-  const { getProducts, products, cleanUpProducts } = useProduct();
+interface HomeProps {
+  products: Product[];
+  error?: string;
+  e?: any;
+}
 
-  useEffect(() => {
-    getProducts();
-    return cleanUpProducts;
-  }, [getProducts]);
+const Home: NextPage<HomeProps> = ({ products, error, e }) => {
+  if (error) alert(error);
+  if (e) console.log(e);
 
   return (
     <Layout>
       <Container>
         <_Carousel />
         <div className="my-5">
-          <_CardSlider />
+          <_CardSlider products={products} />
         </div>
         <div className="mt-5">
           <_Nav />
@@ -45,3 +46,12 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const data: any = await _getProducts();
+
+  if (data.error)
+    return { props: { products: [], error: data.error, e: data.e || "" } };
+
+  return { props: { products: data } };
+};

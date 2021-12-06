@@ -8,14 +8,16 @@ import "swiper/css/pagination";
 
 // import Swiper core and required modules
 import SwiperCore, { Autoplay } from "swiper";
-import useProduct from "@/lib/useProduct";
 import { Product } from "@/types";
 
 // install Swiper modules
 SwiperCore.use([Autoplay]);
 
-export default function _CardSlider() {
-  const { products } = useProduct();
+interface _CardSliderProps {
+  products: Product[];
+}
+
+export default function _CardSlider({ products }: _CardSliderProps) {
   return (
     <>
       <h1 className={styles.title}>Best Selling Ever</h1>

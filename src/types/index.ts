@@ -13,6 +13,7 @@ export interface Product {
   category: string;
   image: string;
   description: string;
+  sold: number;
   rating: {
     rate: number;
     count: number;

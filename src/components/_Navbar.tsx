@@ -9,10 +9,16 @@ import {
 } from "react-bootstrap";
 import Link from "next/link";
 import styles from "../scss/Navbar.module.scss";
-import useAuth from "@/lib/useAuth";
+import { _logout } from "@/config/api";
+import { useGlobalState } from "@/pages/_app";
 
 export default function _Navbar() {
-  const { logout, user } = useAuth();
+  const { user } = useGlobalState();
+  const logout = () => {
+    _logout();
+    // .then(() => setUser({}))
+    // .catch((error) => alert(error));
+  };
 
   return (
     <div>
@@ -53,10 +59,17 @@ export default function _Navbar() {
             <Link href="/">
               <a className="nav-link">Home</a>
             </Link>
-            <Link href={{ pathname: "/categories", query: { q: "women's clothing" } }}>
+            <Link
+              href={{
+                pathname: "/categories",
+                query: { q: "women's clothing" },
+              }}
+            >
               <a className="nav-link">Women's clothing</a>
             </Link>
-            <Link href={{ pathname: "/categories", query: { q: "men's clothing" } }}>
+            <Link
+              href={{ pathname: "/categories", query: { q: "men's clothing" } }}
+            >
               <a className="nav-link">Men's clothing</a>
             </Link>
             <Link
