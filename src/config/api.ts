@@ -1,5 +1,3 @@
-import { CartItem } from "@/types";
-
 const baseUrl = "toko-online-backend.herokuapp.com";
 const protocol = "https";
 
@@ -12,6 +10,15 @@ interface RegisterData {
 interface LoginData {
   email: string;
   password: string;
+}
+
+interface CartItem {
+  productId: string;
+  name: string;
+  price: number;
+  category: string;
+  description: string;
+  image: string;
 }
 
 export const _signUp = (registerData: RegisterData) => {
@@ -102,6 +109,20 @@ export const _addToCart = (data: CartItem) => {
       credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ item: data }),
+    })
+      .then((response) => response.json())
+      .then((result) => resolve(result))
+      .catch((e) => reject(e));
+  });
+};
+
+export const _deleteFromCart = (productId: string) => {
+  return new Promise((resolve, reject) => {
+    fetch(`${protocol}://${baseUrl}/cart/`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ productId }),
     })
       .then((response) => response.json())
       .then((result) => resolve(result))

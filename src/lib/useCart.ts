@@ -1,7 +1,16 @@
 import { useEffect, useCallback } from "react";
 import { useGlobalState } from "@/pages/_app";
-import { _addToCart, _getCart } from "@/config/api";
-import { Product } from "@/types";
+import { _addToCart, _deleteFromCart, _getCart } from "@/config/api";
+
+interface AddToCart {
+  _id: string;
+  productId?: string;
+  name: string;
+  price: number;
+  category: string;
+  image: string;
+  description: string;
+}
 
 export default function useCart() {
   const { cart, setCart, isAuthentic } = useGlobalState();
@@ -27,10 +36,9 @@ export default function useCart() {
     if (!isAuthentic) getCart();
   }, [getCart]);
 
-  const addToCart = async (product: Product) => {
-    console.log("product", product);
+  const addToCart = async (product: AddToCart) => {
     const data = {
-      productId: product._id,
+      productId: product.productId || product._id,
       name: product.name,
       price: product.price,
       category: product.category,
@@ -49,5 +57,17 @@ export default function useCart() {
     }
   };
 
-  return { cart, addToCart };
+  const deleteFromCart = async (productId: string) => {
+    try {
+      const result: any = await _deleteFromCart(productId);
+      if (result.e) console.log(result.e);
+      if (result.error) return alert(result.error);
+
+      getCart();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return { cart, addToCart, deleteFromCart };
 }

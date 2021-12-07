@@ -6,10 +6,10 @@ import {
   SetStateAction,
 } from "react";
 import { AppProps } from "next/app";
-import { _getCart, _getUser } from "@/config/api";
 import { CartItem, User } from "@/types";
-import "bootstrap-icons/font/bootstrap-icons.css";
+import { _getCart, _getUser } from "@/config/api";
 import "@/scss/main.scss";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 interface GLobalStateType {
   user: User | {};
@@ -40,6 +40,5 @@ export default MyApp;
 
 export const useGlobalState = () => {
   const data: GLobalStateType = useContext(GlobalState);
-  const { user, setUser, setCart, cart, isAuthentic, setAuthentic } = data;
-  return { user, setUser, setCart, cart, isAuthentic, setAuthentic };
+  return data;
 };

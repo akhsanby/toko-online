@@ -11,8 +11,12 @@ import {
 import Image from "next/image";
 import _InputNumber from "../components/_InputNumber";
 import _Jumbotron from "../components/_Jumbotron";
+import useCart from "@/lib/useCart";
+import { CartItem } from "@/types";
 
 export default function Cart() {
+  const { cart } = useCart();
+
   return (
     <Layout>
       <Container className="my-4">
@@ -27,27 +31,29 @@ export default function Cart() {
             </tr>
           </thead>
           <tbody className={styles.custom_table_body}>
-            <tr>
-              <td>
-                <Image
-                  src="https://placeimg.com/640/480/people"
-                  width={200}
-                  height={200}
-                  alt="image"
-                />
-                <p>Lorem ipsum dolor sit amet.</p>
-              </td>
-              <td className="fw-bold">$360</td>
-              <td>
-                <_InputNumber />
-              </td>
-              <td className="fw-bold">$360</td>
-            </tr>
+            {cart.map((product: CartItem) => (
+              <tr key={product._id}>
+                <td>
+                  <Image
+                    src={product.image || "https://placeimg.com/640/480/people"}
+                    width={200}
+                    height={200}
+                    alt="image"
+                  />
+                  <p>{product.name}</p>
+                </td>
+                <td className="fw-bold">${product.price}</td>
+                <td>
+                  <_InputNumber product={product} />
+                </td>
+                <td className="fw-bold">${product.quantity * product.price}</td>
+              </tr>
+            ))}
           </tbody>
           <tfoot>
             <tr>
               <th colspan="3">Subtotal</th>
-              <th>$360</th>
+              <th>${getTotal(cart)}</th>
             </tr>
           </tfoot>
         </Table>
@@ -59,3 +65,11 @@ export default function Cart() {
     </Layout>
   );
 }
+
+const getTotal = (cart: CartItem[]) => {
+  let result = 0;
+  cart.forEach((el) => {
+    result += el.price * el.quantity;
+  });
+  return result;
+};
