@@ -13,9 +13,18 @@ import _InputNumber from "../components/_InputNumber";
 import _Jumbotron from "../components/_Jumbotron";
 import useCart from "@/lib/useCart";
 import { CartItem } from "@/types";
+import useAuth from "@/lib/useAuth";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Cart() {
+  const router = useRouter();
+  const { isAuthentic } = useAuth();
   const { cart } = useCart();
+
+  useEffect(() => {
+    if (router && !isAuthentic) router.replace("/login");
+  }, [router, isAuthentic]);
 
   return (
     <Layout>

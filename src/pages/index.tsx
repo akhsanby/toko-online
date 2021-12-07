@@ -47,7 +47,7 @@ const Home: NextPage<HomeProps> = ({ products, error, e }) => {
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const data: any = await _getProducts();
 
   if (data.error)

@@ -1,7 +1,32 @@
+import { _getIncome } from "@/config/api";
+import { Income } from "@/types";
+import { NextPage } from "next";
 import { Container, Table } from "react-bootstrap";
+import { useEffect, useState } from "react";
 import { AdminLayout } from "../components/Layout";
+import useAuth from "@/lib/useAuth";
 
-export default function Reports() {
+const Reports: NextPage = () => {
+  const { isAuthentic } = useAuth();
+  const [data, setData] = useState<Income>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result: any = await _getIncome();
+      try {
+        if (result.e) console.log(result.e);
+        if (result.error) alert(result.error);
+
+        setData(result);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (isAuthentic) fetchData();
+  }, [isAuthentic]);
+
+  // console.log(data);
+
   return (
     <AdminLayout>
       <Container className="my-4 font-roboto">
@@ -16,35 +41,30 @@ export default function Reports() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <h2>Lorem ipsum dolor sit amet.</h2>
-                <span className="text-muted">Men Clothing</span>
-              </td>
-              <td>$100</td>
-              <td>10</td>
-              <td>$1000</td>
-            </tr>
-            <tr>
-              <td>
-                <h2>Lorem ipsum dolor sit amet.</h2>
-                <span className="text-muted">Women Clothing</span>
-              </td>
-              <td>$200</td>
-              <td>10</td>
-              <td>$2000</td>
-            </tr>
+            {data?.items.map((product) => (
+              <tr>
+                <td>
+                  <h2>{product.name}</h2>
+                  <span className="text-muted">{product.category}</span>
+                </td>
+                <td>${product.price}</td>
+                <td>{product.sold}</td>
+                <td>${product.total}</td>
+              </tr>
+            ))}
           </tbody>
           <tfoot>
             <tr>
               <td colspan="3" className="fw-bold">
                 Total Income
               </td>
-              <td className="fw-bold">$3000</td>
+              <td className="fw-bold">${data?.total}</td>
             </tr>
           </tfoot>
         </Table>
       </Container>
     </AdminLayout>
   );
-}
+};
+
+export default Reports;

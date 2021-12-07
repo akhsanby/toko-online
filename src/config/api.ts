@@ -129,3 +129,12 @@ export const _deleteFromCart = (productId: string) => {
       .catch((e) => reject(e));
   });
 };
+
+export const _getIncome = () => {
+  return new Promise((resolve, reject) => {
+    fetch(`${protocol}://${baseUrl}/product/income`, { credentials: "include" })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch((e) => reject(e));
+  });
+};
