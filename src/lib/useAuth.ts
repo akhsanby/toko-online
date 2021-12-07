@@ -10,7 +10,8 @@ interface LoginData {
 
 export default function useAuth() {
   const { push } = useRouter();
-  const { user, setUser, isAuthentic, setAuthentic, setCart } = useGlobalState();
+  const { user, setUser, isAuthentic, setAuthentic, setCart } =
+    useGlobalState();
 
   useEffect(() => {
     const getUser = async () => {
@@ -21,8 +22,10 @@ export default function useAuth() {
           console.log(data.error);
           return;
         }
-        setUser(data);
-        setAuthentic(true);
+        if (data._id) {
+          setUser(data);
+          setAuthentic(true);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -37,7 +40,7 @@ export default function useAuth() {
       if (error) return alert(error);
 
       setUser({});
-      setCart([])
+      setCart([]);
       setAuthentic(false);
     } catch (error) {
       console.log(error);

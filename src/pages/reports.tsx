@@ -5,17 +5,23 @@ import { Container, Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { AdminLayout } from "../components/Layout";
 import useAuth from "@/lib/useAuth";
+import { useRouter } from "next/router";
 
 const Reports: NextPage = () => {
+  const { replace } = useRouter();
   const { isAuthentic } = useAuth();
   const [data, setData] = useState<Income>();
 
   useEffect(() => {
     const fetchData = async () => {
-      const result: any = await _getIncome();
       try {
+        const result: any = await _getIncome();
+        console.log("result",result)
         if (result.e) console.log(result.e);
-        if (result.error) alert(result.error);
+        if (result.error) {
+          alert(result.error);
+          replace("/");
+        }
 
         setData(result);
       } catch (error) {
@@ -39,17 +45,18 @@ const Reports: NextPage = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.items.map((product) => (
-              <tr>
-                <td>
-                  <h2>{product.name}</h2>
-                  <span className="text-muted">{product.category}</span>
-                </td>
-                <td>${product.price}</td>
-                <td>{product.sold}</td>
-                <td>${product.total}</td>
-              </tr>
-            ))}
+            {data?.items?.length &&
+              data.items.map((product) => (
+                <tr>
+                  <td>
+                    <h2>{product.name}</h2>
+                    <span className="text-muted">{product.category}</span>
+                  </td>
+                  <td>${product.price}</td>
+                  <td>{product.sold}</td>
+                  <td>${product.total}</td>
+                </tr>
+              ))}
           </tbody>
           <tfoot>
             <tr>
