@@ -12,13 +12,19 @@ interface LoginData {
   password: string;
 }
 
-interface CartItem {
-  productId: string;
+interface CartData {
+  productId?: string;
   name: string;
   price: number;
+  stock: number;
   category: string;
-  description: string;
   image: string;
+  description: string;
+  sold: number;
+  rating: {
+    rate: number;
+    count: number;
+  };
 }
 
 export const _signUp = (registerData: RegisterData) => {
@@ -102,7 +108,7 @@ export const _getCart = () => {
   });
 };
 
-export const _addToCart = (data: CartItem) => {
+export const _addToCart = (data: CartData) => {
   return new Promise((resolve, reject) => {
     fetch(`${protocol}://${baseUrl}/cart/`, {
       method: "POST",

@@ -49,7 +49,12 @@ export default function Cart() {
                     height={200}
                     alt="image"
                   />
-                  <p>{product.name}</p>
+                  <div>
+                    <p>{product.name}</p>
+                    {product.quantity > product.stock && (
+                      <p style={{ color: "red" }}>quantity tidak terpenuhi</p>
+                    )}
+                  </div>
                 </td>
                 <td className="fw-bold">${product.price}</td>
                 <td>

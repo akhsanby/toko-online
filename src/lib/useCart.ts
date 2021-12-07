@@ -10,6 +10,9 @@ interface AddToCart {
   category: string;
   image: string;
   description: string;
+  stock: number;
+  sold: number;
+  rating: { count: number; rate: number };
 }
 
 export default function useCart() {
@@ -44,6 +47,9 @@ export default function useCart() {
       category: product.category,
       image: product.image,
       description: product.description,
+      sold: product.sold,
+      stock: product.stock,
+      rating: product.rating,
     };
 
     try {

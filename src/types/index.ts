@@ -25,9 +25,15 @@ export interface CartItem {
   productId: string;
   name: string;
   price: number;
+  stock: number;
   category: string;
-  description: string;
   image: string;
+  description: string;
+  sold: number;
+  rating: {
+    rate: number;
+    count: number;
+  };
   quantity: number;
 }
 
