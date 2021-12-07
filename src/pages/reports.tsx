@@ -25,8 +25,6 @@ const Reports: NextPage = () => {
     if (isAuthentic) fetchData();
   }, [isAuthentic]);
 
-  // console.log(data);
-
   return (
     <AdminLayout>
       <Container className="my-4 font-roboto">

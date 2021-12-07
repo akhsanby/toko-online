@@ -6,6 +6,8 @@ import { Product } from "@/types";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import { _getProduct } from "@/config/api";
 import useCart from "@/lib/useCart";
+import useAuth from "@/lib/useAuth";
+import { useRouter } from "next/router";
 
 interface DetailProductProps {
   message?: string;
@@ -13,8 +15,9 @@ interface DetailProductProps {
 }
 
 const DetailProduct: NextPage<DetailProductProps> = ({ message, product }) => {
-
-  const{ addToCart } =useCart()
+  const { replace } = useRouter();
+  const { addToCart } = useCart();
+  const { isAuthentic } = useAuth();
 
   if (message) alert(message);
 
@@ -48,7 +51,13 @@ const DetailProduct: NextPage<DetailProductProps> = ({ message, product }) => {
                   <span className="fs-7 text-white">{`( ${product.rating?.count} Reviews )`}</span>
                 </Card.Text>
                 <Card.Text className="mt-4 d-flex align-items-center gap-2">
-                  <button onClick={()=>addToCart(product)} className={styles.btn_custom_1} type="button">
+                  <button
+                    onClick={() =>
+                      isAuthentic ? addToCart(product) : replace("/login")
+                    }
+                    className={styles.btn_custom_1}
+                    type="button"
+                  >
                     Add To Cart
                   </button>
                   <button className={styles.btn_custom_2} type="button">
@@ -77,15 +86,17 @@ const DetailProduct: NextPage<DetailProductProps> = ({ message, product }) => {
 
 export default DetailProduct;
 
-export const getServerSideProps:GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext
+) => {
   const { detail }: any = ctx.params;
 
   try {
-    const data:any = await _getProduct(detail)
+    const data: any = await _getProduct(detail);
 
     return { props: { product: data } };
   } catch (e) {
     const { message }: any = e;
-    return { props: { product: [], message:message||"" } };
+    return { props: { product: [], message: message || "" } };
   }
 };
