@@ -1,4 +1,7 @@
+import { CartItem } from "@/types";
+
 const baseUrl = "toko-online-backend.herokuapp.com";
+const protocol = "https";
 
 interface RegisterData {
   name: string;
@@ -13,7 +16,7 @@ interface LoginData {
 
 export const _signUp = (registerData: RegisterData) => {
   return new Promise((resolve, reject) => {
-    fetch(`https://${baseUrl}/user/register`, {
+    fetch(`${protocol}://${baseUrl}/user/register`, {
       method: "POST",
       body: JSON.stringify(registerData),
       headers: { "Content-Type": "application/json" },
@@ -26,7 +29,7 @@ export const _signUp = (registerData: RegisterData) => {
 
 export const _signIn = (loginData: LoginData) => {
   return new Promise((resolve, reject) => {
-    fetch(`https://${baseUrl}/user/login`, {
+    fetch(`${protocol}://${baseUrl}/user/login`, {
       mode: "cors",
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -41,7 +44,7 @@ export const _signIn = (loginData: LoginData) => {
 
 export const _logout = () => {
   return new Promise((resolve, reject) => {
-    fetch(`https://${baseUrl}/user/logout`, {
+    fetch(`${protocol}://${baseUrl}/user/logout`, {
       mode: "cors",
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -55,7 +58,7 @@ export const _logout = () => {
 
 export const _getUser = () => {
   return new Promise((resolve, reject) => {
-    fetch(`https://${baseUrl}/user`, { credentials: "include" })
+    fetch(`${protocol}://${baseUrl}/user`, { credentials: "include" })
       .then((response) => response.json())
       .then((data) => resolve(data))
       .catch((e) => reject(e));
@@ -63,7 +66,7 @@ export const _getUser = () => {
 };
 
 export const _getProducts = (query?: string) => {
-  let URL = `https://${baseUrl}/product`;
+  let URL = `${protocol}://${baseUrl}/product`;
   if (query) URL += `?category=${query}`;
 
   return new Promise((resolve, reject) => {
@@ -74,11 +77,34 @@ export const _getProducts = (query?: string) => {
   });
 };
 
-export const _getCart = () => {
+export const _getProduct = (productId?: string) => {
   return new Promise((resolve, reject) => {
-    fetch(`https://${baseUrl}/cart/`, { credentials: "include" })
+    fetch(`${protocol}://${baseUrl}/product/${productId}`)
       .then((response) => response.json())
       .then((data) => resolve(data))
+      .catch((e) => reject(e));
+  });
+};
+
+export const _getCart = () => {
+  return new Promise((resolve, reject) => {
+    fetch(`${protocol}://${baseUrl}/cart/`, { credentials: "include" })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch((e) => reject(e));
+  });
+};
+
+export const _addToCart = (data: CartItem) => {
+  return new Promise((resolve, reject) => {
+    fetch(`${protocol}://${baseUrl}/cart/`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ item: data }),
+    })
+      .then((response) => response.json())
+      .then((result) => resolve(result))
       .catch((e) => reject(e));
   });
 };

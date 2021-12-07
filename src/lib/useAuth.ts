@@ -1,7 +1,7 @@
 import { _getUser, _logout, _signIn } from "@/config/api";
 import { useGlobalState } from "@/pages/_app";
 import { useRouter } from "next/router";
-import { useEffect, useState, SyntheticEvent } from "react";
+import { useEffect, SyntheticEvent } from "react";
 
 interface LoginData {
   email: string;

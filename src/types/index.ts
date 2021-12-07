@@ -21,12 +21,12 @@ export interface Product {
 }
 
 export interface CartItem {
-  _id: string;
+  _id?: string;
   productId: string;
   name: string;
   price: number;
   category: string;
   description: string;
   image: string;
-  quantity: number;
+  quantity?: number;
 }

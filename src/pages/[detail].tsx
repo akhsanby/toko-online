@@ -5,6 +5,7 @@ import { Container, Card, Row, Col, Nav, InputGroup } from "react-bootstrap";
 import { Product } from "@/types";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import { _getProduct } from "@/config/api";
+import useCart from "@/lib/useCart";
 
 interface DetailProductProps {
   message?: string;
@@ -12,6 +13,9 @@ interface DetailProductProps {
 }
 
 const DetailProduct: NextPage<DetailProductProps> = ({ message, product }) => {
+
+  const{ addToCart } =useCart()
+
   if (message) alert(message);
 
   return (
@@ -44,7 +48,7 @@ const DetailProduct: NextPage<DetailProductProps> = ({ message, product }) => {
                   <span className="fs-7 text-white">{`( ${product.rating?.count} Reviews )`}</span>
                 </Card.Text>
                 <Card.Text className="mt-4 d-flex align-items-center gap-2">
-                  <button className={styles.btn_custom_1} type="button">
+                  <button onClick={()=>addToCart(product)} className={styles.btn_custom_1} type="button">
                     Add To Cart
                   </button>
                   <button className={styles.btn_custom_2} type="button">
@@ -82,6 +86,6 @@ export const getServerSideProps:GetServerSideProps = async (ctx: GetServerSidePr
     return { props: { product: data } };
   } catch (e) {
     const { message }: any = e;
-    return { props: { product: [], message } };
+    return { props: { product: [], message:message||"" } };
   }
 };
