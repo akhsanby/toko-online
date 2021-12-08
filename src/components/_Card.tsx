@@ -10,7 +10,7 @@ interface _CardProps {
 export default function _Card({ product }: _CardProps) {
   const { push } = useRouter();
   return (
-    <Card onClick={() => push(`/${product._id}`)} className={styles.card}>
+    <Card onClick={() => push(`/${product.name}?id=${product._id}`)} className={styles.card}>
       <Card.Img variant="top" src={product.image} />
       <Card.Body className={styles.card_body}>
         <Card.Title className="fw-bold fs-4">{product.name}</Card.Title>

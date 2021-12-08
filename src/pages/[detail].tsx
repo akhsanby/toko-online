@@ -89,10 +89,10 @@ export default DetailProduct;
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext
 ) => {
-  const { detail }: any = ctx.params;
+  const { id }: any = ctx.query;
 
   try {
-    const data: any = await _getProduct(detail);
+    const data: any = await _getProduct(id);
 
     return { props: { product: data } };
   } catch (e) {
