@@ -17,13 +17,13 @@ export default function useAuth() {
   const getUser = useCallback(async () => {
     try {
       const data: any = await _getUser();
-      if (data.e) console.log(data.e);
-      if (data.error) {
-        console.log(data.error);
+      if (data?.e) console.log(data?.e);
+      if (data?.error) {
+        console.log(data?.error);
         setUser({});
         setAuthentic(false);
       }
-      if (data._id) {
+      if (data?._id) {
         setUser(data);
         setAuthentic(true);
       }
@@ -58,7 +58,7 @@ export default function useAuth() {
       if (error) return alert(error);
 
       const user: any = await getUser();
-      if (!user.e) push("/");
+      if (!user?.e) push("/");
     } catch (error) {
       console.log(error);
     }

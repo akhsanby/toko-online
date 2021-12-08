@@ -37,6 +37,7 @@ interface UpdateProductData {
   sold: number;
 }
 
+// AUTH
 export const _signUp = (registerData: RegisterData) => {
   return new Promise((resolve, reject) => {
     fetch(`${protocol}://${baseUrl}/user/register`, {
@@ -53,7 +54,6 @@ export const _signUp = (registerData: RegisterData) => {
 export const _signIn = (loginData: LoginData) => {
   return new Promise((resolve, reject) => {
     fetch(`${protocol}://${baseUrl}/user/login`, {
-      mode: "cors",
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -68,7 +68,6 @@ export const _signIn = (loginData: LoginData) => {
 export const _logout = () => {
   return new Promise((resolve, reject) => {
     fetch(`${protocol}://${baseUrl}/user/logout`, {
-      mode: "cors",
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -88,6 +87,7 @@ export const _getUser = () => {
   });
 };
 
+// PRODUCT
 export const _getProducts = (query?: string) => {
   let URL = `${protocol}://${baseUrl}/product`;
   if (query) URL += `?category=${query}`;
@@ -109,6 +109,30 @@ export const _getProduct = (productId?: string) => {
   });
 };
 
+export const _updateProduct = (productId: string, data: UpdateProductData) => {
+  return new Promise((resolve, reject) => {
+    fetch(`${protocol}://${baseUrl}/product/${productId}`, {
+      method: "PUT",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch((e) => reject(e));
+  });
+};
+
+export const _getIncome = () => {
+  return new Promise((resolve, reject) => {
+    fetch(`${protocol}://${baseUrl}/product/income`, { credentials: "include" })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch((e) => reject(e));
+  });
+};
+
+// CART
 export const _getCart = () => {
   return new Promise((resolve, reject) => {
     fetch(`${protocol}://${baseUrl}/cart/`, { credentials: "include" })
@@ -118,6 +142,7 @@ export const _getCart = () => {
   });
 };
 
+// CART
 export const _addToCart = (data: CartData) => {
   return new Promise((resolve, reject) => {
     fetch(`${protocol}://${baseUrl}/cart/`, {
@@ -144,27 +169,17 @@ export const _deleteFromCart = (productId: string) => {
       .then((result) => resolve(result))
       .catch((e) => reject(e));
   });
-};
+}
 
-export const _getIncome = () => {
+export const _chekout = () => {
   return new Promise((resolve, reject) => {
-    fetch(`${protocol}://${baseUrl}/product/income`, { credentials: "include" })
-      .then((response) => response.json())
-      .then((data) => resolve(data))
-      .catch((e) => reject(e));
-  });
-};
-
-export const _updateProduct = (productId: string, data: UpdateProductData) => {
-  return new Promise((resolve, reject) => {
-    fetch(`${protocol}://${baseUrl}/product/${productId}`, {
-      method: "PUT",
-      credentials: "include",
+    fetch(`${protocol}://${baseUrl}/cart/checkout`, {
+      method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      credentials: "include",
     })
       .then((response) => response.json())
-      .then((data) => resolve(data))
+      .then((result) => resolve(result))
       .catch((e) => reject(e));
   });
-};
+}

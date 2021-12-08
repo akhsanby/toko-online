@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { _addToCart, _deleteFromCart, _getCart } from "@/config/api";
+import { _addToCart, _chekout, _deleteFromCart, _getCart } from "@/config/api";
 import { useGlobalState } from "@/pages/_app";
 
 interface AddToCart {
@@ -21,10 +21,10 @@ export default function useCart() {
   const getCart = useCallback(async () => {
     try {
       const data: any = await _getCart();
-      if (data.e) console.log(data.e);
-      if (data.error) {
-        console.log(data.error);
-        setCart([])
+      if (data?.e) console.log(data?.e);
+      if (data?.error) {
+        console.log(data?.error);
+        setCart([]);
         return;
       }
       if (data) setCart(data);
@@ -48,8 +48,8 @@ export default function useCart() {
 
     try {
       const result: any = await _addToCart(data);
-      if (result.e) console.log(result.e);
-      if (result.error) return alert(result.error);
+      if (result?.e) console.log(result?.e);
+      if (result?.error) return alert(result?.error);
 
       await getCart();
     } catch (error) {
@@ -60,8 +60,8 @@ export default function useCart() {
   const deleteFromCart = async (productId: string) => {
     try {
       const result: any = await _deleteFromCart(productId);
-      if (result.e) console.log(result.e);
-      if (result.error) return alert(result.error);
+      if (result?.e) console.log(result?.e);
+      if (result?.error) return alert(result?.error);
 
       await getCart();
     } catch (error) {
@@ -69,5 +69,18 @@ export default function useCart() {
     }
   };
 
-  return { cart, addToCart, deleteFromCart, getCart };
+  const checkout = async () => {
+    try {
+      const result: any = await _chekout();
+      if (result?.e) console.log(result?.e);
+      if (result?.error) return alert(result?.error);
+      if (result?.message) alert(result?.message);
+
+      await getCart();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return { cart, addToCart, deleteFromCart, getCart, checkout };
 }
