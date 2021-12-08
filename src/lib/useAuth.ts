@@ -12,8 +12,7 @@ interface LoginData {
 export default function useAuth() {
   const { push } = useRouter();
   const { getCart } = useCart();
-  const { user, setUser, isAuthentic, setAuthentic, setCart } =
-    useGlobalState();
+  const { user, setUser, isAuthentic, setAuthentic } = useGlobalState();
 
   const getUser = useCallback(async () => {
     try {

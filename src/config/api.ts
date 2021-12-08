@@ -27,6 +27,16 @@ interface CartData {
   };
 }
 
+interface UpdateProductData {
+  name: string;
+  price: number;
+  stock: number;
+  category: string;
+  image: string;
+  description: string;
+  sold: number;
+}
+
 export const _signUp = (registerData: RegisterData) => {
   return new Promise((resolve, reject) => {
     fetch(`${protocol}://${baseUrl}/user/register`, {
@@ -139,6 +149,20 @@ export const _deleteFromCart = (productId: string) => {
 export const _getIncome = () => {
   return new Promise((resolve, reject) => {
     fetch(`${protocol}://${baseUrl}/product/income`, { credentials: "include" })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch((e) => reject(e));
+  });
+};
+
+export const _updateProduct = (productId: string, data: UpdateProductData) => {
+  return new Promise((resolve, reject) => {
+    fetch(`${protocol}://${baseUrl}/product/${productId}`, {
+      method: "PUT",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
       .then((response) => response.json())
       .then((data) => resolve(data))
       .catch((e) => reject(e));

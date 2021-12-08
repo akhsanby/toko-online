@@ -1,13 +1,13 @@
-import { Container, Table, Form, Row, Col } from "react-bootstrap";
-import Image from "next/image";
-import { AdminLayout } from "../components/Layout";
-import styles from "../scss/Manage.module.scss";
-import { GetServerSideProps, NextPage } from "next";
-import { _getProducts } from "@/config/api";
-import { Product, User } from "@/types";
 import { useState, useEffect, ChangeEvent } from "react";
+import { NextPage } from "next";
+import Image from "next/image";
 import { useRouter } from "next/router";
+import { Container, Table, Form, Row, Col } from "react-bootstrap";
+import { _getProducts, _updateProduct } from "@/config/api";
+import { Product } from "@/types";
+import { AdminLayout } from "@/components/Layout";
 import useAuth from "@/lib/useAuth";
+import styles from "@/scss/Manage.module.scss";
 
 const Manage: NextPage = () => {
   const { replace } = useRouter();
@@ -33,6 +33,15 @@ const Manage: NextPage = () => {
     const newValue: number = parseInt(e.target.value);
     products[index].stock = newValue;
     setProducts([...products]);
+  };
+
+  const updateProduct = async (product: Product) => {
+    const { name, price, stock, image, sold, description, category } = product;
+    const data = { name, price, stock, image, sold, description, category };
+    const updated: any = await _updateProduct(product._id, data);
+    if (updated.e) console.log(updated.e);
+    if (updated.error) return alert(updated.error);
+    if (updated._id) alert("updated");
   };
 
   return (
@@ -76,7 +85,12 @@ const Manage: NextPage = () => {
                   />
                 </td>
                 <td className="align-middle">
-                  <button className={styles.custom_btn}>Update</button>
+                  <button
+                    onClick={() => updateProduct(product)}
+                    className={styles.custom_btn}
+                  >
+                    Update
+                  </button>
                 </td>
               </tr>
             ))}
