@@ -171,7 +171,7 @@ export const _deleteFromCart = (productId: string) => {
   });
 }
 
-export const _chekout = () => {
+export const _checkout = () => {
   return new Promise((resolve, reject) => {
     fetch(`${protocol}://${baseUrl}/cart/checkout`, {
       method: "POST",
