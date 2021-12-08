@@ -1,6 +1,6 @@
-import { useEffect, useCallback } from "react";
-import { useGlobalState } from "@/pages/_app";
+import { useCallback } from "react";
 import { _addToCart, _deleteFromCart, _getCart } from "@/config/api";
+import { useGlobalState } from "@/pages/_app";
 
 interface AddToCart {
   _id: string;
@@ -16,28 +16,22 @@ interface AddToCart {
 }
 
 export default function useCart() {
-  const { cart, setCart, isAuthentic } = useGlobalState();
+  const { cart, setCart } = useGlobalState();
 
-  const getCart = useCallback(() => {
-    const fetchData = async () => {
-      try {
-        const data: any = await _getCart();
-        if (data.e) console.log(data.e);
-        if (data.error) {
-          console.log(data.error);
-          return;
-        }
-        setCart(data);
-      } catch (error) {
-        console.log(error);
+  const getCart = useCallback(async () => {
+    try {
+      const data: any = await _getCart();
+      if (data.e) console.log(data.e);
+      if (data.error) {
+        console.log(data.error);
+        setCart([])
+        return;
       }
-    };
-    fetchData();
+      if (data) setCart(data);
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
-
-  useEffect(() => {
-    if (!isAuthentic) getCart();
-  }, [getCart]);
 
   const addToCart = async (product: AddToCart) => {
     const data = {
@@ -57,7 +51,7 @@ export default function useCart() {
       if (result.e) console.log(result.e);
       if (result.error) return alert(result.error);
 
-      getCart();
+      await getCart();
     } catch (error) {
       console.log(error);
     }
@@ -69,11 +63,11 @@ export default function useCart() {
       if (result.e) console.log(result.e);
       if (result.error) return alert(result.error);
 
-      getCart();
+      await getCart();
     } catch (error) {
       console.log(error);
     }
   };
 
-  return { cart, addToCart, deleteFromCart };
+  return { cart, addToCart, deleteFromCart, getCart };
 }
