@@ -1,8 +1,9 @@
 import _Navbar from "./_Navbar";
 import _Footer from "./_Footer";
 import _AdminNavbar from "./_AdminNavbar";
+import { ReactNode } from "react-transition-group/node_modules/@types/react";
 
-export function Layout({ children }) {
+export function Layout({ children }: { children: ReactNode }) {
   return (
     <div>
       <_Navbar />
@@ -12,7 +13,7 @@ export function Layout({ children }) {
   );
 }
 
-export function AdminLayout({ children }) {
+export function AdminLayout({ children }: { children: ReactNode }) {
   return (
     <div>
       <_AdminNavbar />

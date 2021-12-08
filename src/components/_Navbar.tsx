@@ -9,8 +9,14 @@ import {
 } from "react-bootstrap";
 import Link from "next/link";
 import styles from "../scss/Navbar.module.scss";
+import { _logout } from "@/config/api";
+import useAuth from "@/lib/useAuth";
+import useCart from "@/lib/useCart";
 
 export default function _Navbar() {
+  const { isAuthentic, logout } = useAuth();
+  const { cart } = useCart();
+
   return (
     <div>
       <Navbar expand="sm" className={styles.custom_navbar_1}>
@@ -27,14 +33,20 @@ export default function _Navbar() {
               <a className="nav-link">
                 <i className="bi bi-cart p-0 position-relative">
                   <span className="bg-red position-absolute top-0 start-100 fs-7 translate-middle badge rounded-pill">
-                    0
+                    {cart.length}
                   </span>
                 </i>
               </a>
             </Link>
-            <Link href="/login">
-              <button className={styles.custom_btn_style}>Sign in</button>
-            </Link>
+            {!isAuthentic ? (
+              <Link href="/login">
+                <button className={styles.custom_btn_style}>Sign in</button>
+              </Link>
+            ) : (
+              <button onClick={logout} className={styles.custom_btn_style}>
+                Logout
+              </button>
+            )}
           </Nav>
         </Container>
       </Navbar>
@@ -44,11 +56,18 @@ export default function _Navbar() {
             <Link href="/">
               <a className="nav-link">Home</a>
             </Link>
-            <Link href={{ pathname: "/categories", query: { q: "women" } }}>
-              <a className="nav-link">Women's</a>
+            <Link
+              href={{
+                pathname: "/categories",
+                query: { q: "women's clothing" },
+              }}
+            >
+              <a className="nav-link">Women's clothing</a>
             </Link>
-            <Link href={{ pathname: "/categories", query: { q: "men" } }}>
-              <a className="nav-link">Men's</a>
+            <Link
+              href={{ pathname: "/categories", query: { q: "men's clothing" } }}
+            >
+              <a className="nav-link">Men's clothing</a>
             </Link>
             <Link
               href={{ pathname: "/categories", query: { q: "electronics" } }}
@@ -57,6 +76,9 @@ export default function _Navbar() {
             </Link>
             <Link href={{ pathname: "/categories", query: { q: "jewelery" } }}>
               <a className="nav-link">Jewelery</a>
+            </Link>
+            <Link href={{ pathname: "/reports"}}>
+              <a className="nav-link">Admin</a>
             </Link>
           </Nav>
         </Container>

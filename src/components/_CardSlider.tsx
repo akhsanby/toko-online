@@ -8,11 +8,16 @@ import "swiper/css/pagination";
 
 // import Swiper core and required modules
 import SwiperCore, { Autoplay } from "swiper";
+import { Product } from "@/types";
 
 // install Swiper modules
 SwiperCore.use([Autoplay]);
 
-export default function _CardSlider() {
+interface _CardSliderProps {
+  products: Product[];
+}
+
+export default function _CardSlider({ products }: _CardSliderProps) {
   return (
     <>
       <h1 className={styles.title}>Best Selling Ever</h1>
@@ -46,9 +51,9 @@ export default function _CardSlider() {
           },
         }}
       >
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-          <SwiperSlide key={i}>
-            <_Card />
+        {products.map((product: Product) => (
+          <SwiperSlide key={product._id}>
+            <_Card product={product} />
           </SwiperSlide>
         ))}
       </Swiper>

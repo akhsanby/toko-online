@@ -1,10 +1,22 @@
-import { Layout } from "../components/Layout";
-import _Jumbotron from "../components/_Jumbotron";
-import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
-import _Card from "../components/_Card";
-import styles from "../scss/Categories.module.scss";
+import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
+import { Container, Row, Col, Card, Form } from "react-bootstrap";
+import { Product } from "@/types";
+import { _getProducts } from "@/config/api";
+import _Jumbotron from "@/components/_Jumbotron";
+import { Layout } from "@/components/Layout";
+import _Card from "@/components/_Card";
+import styles from "@/scss/Categories.module.scss";
 
-export default function Categories() {
+interface CategoriesProps {
+  products: Product[];
+  error?: string;
+  e?: any;
+}
+
+const Categories: NextPage<CategoriesProps> = ({ products, error, e }) => {
+  if (error) alert(error);
+  if (e) console.log(e);
+
   return (
     <Layout>
       <Container>
@@ -72,20 +84,35 @@ export default function Categories() {
           </Col>
           <Col lg={8}>
             <Row>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
-                <Col className="mb-4" key={i} lg={3} md={4} xs={6}>
-                  <_Card />
+              {products.map((product: Product) => (
+                <Col className="mb-4" key={product._id} lg={3} md={4} xs={6}>
+                  <_Card product={product} />
                 </Col>
               ))}
             </Row>
-            <div className="text-center">
+            {/* <div className="text-center">
               <button type="button" className={styles.btn_custom}>
                 Browse More
               </button>
-            </div>
+            </div> */}
           </Col>
         </Row>
       </Container>
     </Layout>
   );
-}
+};
+
+export default Categories;
+
+export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // console.log("cookie", ctx.req.cookies);
+
+  const { q }: any = ctx.query;
+
+  const data: any = await _getProducts(q);
+
+  if (data.error)
+    return { props: { products: [], error: data.error, e: data.e || "" } };
+
+  return { props: { products: data } };
+};

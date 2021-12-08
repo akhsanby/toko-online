@@ -1,8 +1,21 @@
+import { useState } from "react";
+import { NextPage } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Card, Form } from "react-bootstrap";
-import styles from "../scss/Login.module.scss";
+import { _getUser, _signIn } from "@/config/api";
+import useAuth from "@/lib/useAuth";
+import styles from "@/scss/Login.module.scss";
 
-export default function Login() {
+const Login: NextPage = () => {
+  const { replace } = useRouter();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const { isAuthentic, login } = useAuth();
+
+  if (isAuthentic) replace("/");
+
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 font-roboto">
       <Card
@@ -16,12 +29,17 @@ export default function Login() {
               Enter Login details to get access
             </Card.Text>
           </div>
-          <Form className="mx-4">
+          <Form
+            onSubmit={(e) => login(e, { email, password })}
+            className="mx-4"
+          >
             <Form.Group className="mb-3">
               <Form.Label className="fw-bold">
                 Username Or Email Address
               </Form.Label>
               <Form.Control
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
                 type="text"
                 placeholder="Username / Email Address"
                 className={styles.form_control}
@@ -30,6 +48,8 @@ export default function Login() {
             <Form.Group className="mb-3">
               <Form.Label className="fw-bold">Password</Form.Label>
               <Form.Control
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
                 type="password"
                 placeholder="Enter Password"
                 className={styles.form_control}
@@ -55,7 +75,7 @@ export default function Login() {
                 </Link>{" "}
                 here
               </div>
-              <button className={styles.custom_btn} type="button">
+              <button className={styles.custom_btn} type="submit">
                 Login
               </button>
             </div>
@@ -64,4 +84,6 @@ export default function Login() {
       </Card>
     </div>
   );
-}
+};
+
+export default Login;
