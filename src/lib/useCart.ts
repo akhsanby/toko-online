@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { _addToCart, _chekout, _deleteFromCart, _getCart } from "@/config/api";
+import { _addToCart, _checkout, _deleteFromCart, _getCart } from "@/config/api";
 import { useGlobalState } from "@/pages/_app";
 
 interface AddToCart {
