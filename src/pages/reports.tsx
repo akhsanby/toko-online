@@ -9,27 +9,26 @@ import { useRouter } from "next/router";
 
 const Reports: NextPage = () => {
   const { replace } = useRouter();
-  const { isAuthentic } = useAuth();
+  const user: any = useAuth().user;
   const [data, setData] = useState<Income>();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result: any = await _getIncome();
-        console.log("result",result)
         if (result.e) console.log(result.e);
         if (result.error) {
           alert(result.error);
           replace("/");
         }
-
         setData(result);
       } catch (error) {
         console.log(error);
       }
     };
-    if (isAuthentic) fetchData();
-  }, [isAuthentic]);
+    if (user?.email === "admin@bukapedia.com") fetchData();
+    else replace("/");
+  }, []);
 
   return (
     <AdminLayout>

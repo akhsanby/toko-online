@@ -4,20 +4,30 @@ import { AdminLayout } from "../components/Layout";
 import styles from "../scss/Manage.module.scss";
 import { GetServerSideProps, NextPage } from "next";
 import { _getProducts } from "@/config/api";
-import { Product } from "@/types";
-import { useState, ChangeEvent } from "react";
+import { Product, User } from "@/types";
+import { useState, useEffect, ChangeEvent } from "react";
+import { useRouter } from "next/router";
+import useAuth from "@/lib/useAuth";
 
-interface ManageProps {
-  data: Product[];
-  error?: string;
-  e?: any;
-}
+const Manage: NextPage = () => {
+  const { replace } = useRouter();
+  const user: any = useAuth().user;
+  const [products, setProducts] = useState<Product[]>([]);
 
-const Manage: NextPage<ManageProps> = ({ data, error, e }) => {
-  if (error) alert(error);
-  if (e) console.log(e);
-
-  const [products, setProducts] = useState<Product[]>(data || []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result: any = await _getProducts();
+        if (result.e) console.log(result.e);
+        if (result.error) alert(result.error);
+        setProducts(result);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (user?.email === "admin@bukapedia.com") fetchData();
+    else replace("/");
+  }, []);
 
   const updateStock = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const newValue: number = parseInt(e.target.value);
@@ -78,16 +88,3 @@ const Manage: NextPage<ManageProps> = ({ data, error, e }) => {
 };
 
 export default Manage;
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  try {
-    const data: any = await _getProducts();
-
-    if (data.error)
-      return { props: { data: [], error: data.error, e: data.e || "" } };
-
-    return { props: { data: data } };
-  } catch (error) {
-    return { props: { data: [], error } };
-  }
-};

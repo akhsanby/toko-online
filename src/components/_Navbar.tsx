@@ -77,6 +77,9 @@ export default function _Navbar() {
             <Link href={{ pathname: "/categories", query: { q: "jewelery" } }}>
               <a className="nav-link">Jewelery</a>
             </Link>
+            <Link href={{ pathname: "/reports"}}>
+              <a className="nav-link">Admin</a>
+            </Link>
           </Nav>
         </Container>
       </Navbar>

@@ -1,8 +1,12 @@
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import styles from "../scss/Navbar.module.scss";
+import useAuth from "@/lib/useAuth";
 
 export default function _Navbar() {
+  const { push } = useRouter();
+  const { logout } = useAuth();
   return (
     <div>
       <Navbar className={styles.custom_admin_navbar}>
@@ -17,9 +21,15 @@ export default function _Navbar() {
             <Link href="/reports">
               <a className="nav-link">Report Of Sales</a>
             </Link>
-            <Link href="/login">
-              <button className={styles.custom_btn_style}>Logout</button>
-            </Link>
+            <button
+              onClick={async () => {
+                const done: any = await logout();
+                if (!done?.error) push("/");
+              }}
+              className={styles.custom_btn_style}
+            >
+              Logout
+            </button>
           </Nav>
         </Container>
       </Navbar>
