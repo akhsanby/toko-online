@@ -104,10 +104,10 @@ const Categories: NextPage<CategoriesProps> = ({ products, error, e }) => {
 
 export default Categories;
 
-export const getServerSideProps: GetServerSideProps = async (
-  ctx: GetServerSidePropsContext
-) => {
-  const { q }: any | { q: string } = ctx.query;
+export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // console.log("cookie", ctx.req.cookies);
+
+  const { q }: any = ctx.query;
 
   const data: any = await _getProducts(q);
 
