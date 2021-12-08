@@ -1,11 +1,11 @@
 import { useState, SyntheticEvent } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { Card, Form } from "react-bootstrap";
-import styles from "../scss/Login.module.scss";
-import { _signUp } from "@/config/api";
-import { useGlobalState } from "./_app";
 import { NextPage } from "next";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { Card, Form } from "react-bootstrap";
+import { _signUp } from "@/config/api";
+import useAuth from "@/lib/useAuth";
+import styles from "@/scss/Login.module.scss";
 
 const Register: NextPage = () => {
   const { push, replace } = useRouter();
@@ -14,8 +14,8 @@ const Register: NextPage = () => {
   const [password, setPassword] = useState<string>("");
   const [confPassword, setConfPassword] = useState<string>("");
 
-  const { user } = useGlobalState();
-  if (user._id) replace("/");
+  const { isAuthentic } = useAuth();
+  if (isAuthentic) replace("/");
 
   const register = async (event: SyntheticEvent) => {
     event.preventDefault();

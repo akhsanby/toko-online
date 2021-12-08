@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Link from "next/link";
-import { Card, Form } from "react-bootstrap";
-import styles from "@/scss/Login.module.scss";
-import { useRouter } from "next/router";
-import { _getUser, _signIn } from "@/config/api";
 import { NextPage } from "next";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { Card, Form } from "react-bootstrap";
+import { _getUser, _signIn } from "@/config/api";
 import useAuth from "@/lib/useAuth";
+import styles from "@/scss/Login.module.scss";
 
 const Login: NextPage = () => {
   const { replace } = useRouter();

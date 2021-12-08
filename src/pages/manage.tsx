@@ -3,10 +3,10 @@ import { NextPage } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Container, Table, Form, Row, Col } from "react-bootstrap";
-import { _getProducts, _updateProduct } from "@/config/api";
 import { Product } from "@/types";
-import { AdminLayout } from "@/components/Layout";
+import { _getProducts, _updateProduct } from "@/config/api";
 import useAuth from "@/lib/useAuth";
+import { AdminLayout } from "@/components/Layout";
 import styles from "@/scss/Manage.module.scss";
 
 const Manage: NextPage = () => {

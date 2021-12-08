@@ -1,11 +1,11 @@
-import { _getIncome } from "@/config/api";
-import { Income } from "@/types";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { NextPage } from "next";
 import { Container, Table } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import { AdminLayout } from "../components/Layout";
+import { Income } from "@/types";
+import { _getIncome } from "@/config/api";
 import useAuth from "@/lib/useAuth";
-import { useRouter } from "next/router";
+import { AdminLayout } from "@/components/Layout";
 
 const Reports: NextPage = () => {
   const { replace } = useRouter();

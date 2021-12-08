@@ -1,21 +1,14 @@
-import styles from "../scss/Cart.module.scss";
-import { Layout } from "../components/Layout";
-import {
-  Container,
-  Row,
-  Col,
-  FormControl,
-  Table,
-  InputGroup,
-} from "react-bootstrap";
-import Image from "next/image";
-import _InputNumber from "../components/_InputNumber";
-import _Jumbotron from "../components/_Jumbotron";
-import useCart from "@/lib/useCart";
-import { CartItem } from "@/types";
-import useAuth from "@/lib/useAuth";
-import { useRouter } from "next/router";
 import { useEffect } from "react";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { Container, Table } from "react-bootstrap";
+import { CartItem } from "@/types";
+import useCart from "@/lib/useCart";
+import useAuth from "@/lib/useAuth";
+import _InputNumber from "@/components/_InputNumber";
+import _Jumbotron from "@/components/_Jumbotron";
+import { Layout } from "@/components/Layout";
+import styles from "@/scss/Cart.module.scss";
 
 export default function Cart() {
   const router = useRouter();

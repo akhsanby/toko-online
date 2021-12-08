@@ -1,10 +1,4 @@
-import {
-  useContext,
-  createContext,
-  useState,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { useContext, createContext, useState, Dispatch, SetStateAction } from "react";
 import { AppProps } from "next/app";
 import { CartItem, User } from "@/types";
 import { _getCart, _getUser } from "@/config/api";

@@ -1,13 +1,12 @@
-import { Layout } from "../components/Layout";
-import _Carousel from "../components/_Carousel";
-import _Card from "../components/_Card";
-import _Nav from "../components/_Nav";
-import _CardSlider from "../components/_CardSlider";
-import { Container, Row, Col } from "react-bootstrap";
-import styles from "../scss/Home.module.scss";
 import { GetServerSideProps, NextPage } from "next";
+import { Container, Row, Col } from "react-bootstrap";
 import { Product } from "@/types";
 import { _getProducts } from "@/config/api";
+import _Nav from "@/components/_Nav";
+import _Card from "@/components/_Card";
+import { Layout } from "@/components/Layout";
+import _Carousel from "@/components/_Carousel";
+import _CardSlider from "@/components/_CardSlider";
 
 interface HomeProps {
   products: Product[];

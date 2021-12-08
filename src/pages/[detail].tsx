@@ -1,13 +1,13 @@
-import Image from "next/image";
-import { Layout } from "../components/Layout";
-import styles from "../scss/DetailProduct.module.scss";
-import { Container, Card, Row, Col, Nav, InputGroup } from "react-bootstrap";
-import { Product } from "@/types";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
+import { useRouter } from "next/router";
+import Image from "next/image";
+import { Container, Card, Row, Col, Nav } from "react-bootstrap";
+import { Product } from "@/types";
 import { _getProduct } from "@/config/api";
 import useCart from "@/lib/useCart";
 import useAuth from "@/lib/useAuth";
-import { useRouter } from "next/router";
+import { Layout } from "@/components/Layout";
+import styles from "@/scss/DetailProduct.module.scss";
 
 interface DetailProductProps {
   message?: string;

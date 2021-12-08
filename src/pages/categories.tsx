@@ -1,11 +1,11 @@
-import { Layout } from "../components/Layout";
-import _Jumbotron from "../components/_Jumbotron";
-import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
-import _Card from "../components/_Card";
-import styles from "../scss/Categories.module.scss";
-import { Product } from "@/types";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
+import { Container, Row, Col, Card, Form } from "react-bootstrap";
+import { Product } from "@/types";
 import { _getProducts } from "@/config/api";
+import _Jumbotron from "@/components/_Jumbotron";
+import { Layout } from "@/components/Layout";
+import _Card from "@/components/_Card";
+import styles from "@/scss/Categories.module.scss";
 
 interface CategoriesProps {
   products: Product[];
