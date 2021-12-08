@@ -71,7 +71,7 @@ export default function useCart() {
 
   const checkout = async () => {
     try {
-      const result: any = await _chekout();
+      const result: any = await _checkout();
       if (result?.e) console.log(result?.e);
       if (result?.error) return alert(result?.error);
       if (result?.message) alert(result?.message);
