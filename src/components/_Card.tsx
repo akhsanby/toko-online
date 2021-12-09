@@ -1,6 +1,6 @@
 import { Product } from "@/types";
 import { useRouter } from "next/router";
-import { Card, Row, Col } from "react-bootstrap";
+import { Card, Row, Col, OverlayTrigger, Tooltip } from "react-bootstrap";
 import styles from "../scss/Card.module.scss";
 
 interface _CardProps {
@@ -9,14 +9,29 @@ interface _CardProps {
 
 export default function _Card({ product }: _CardProps) {
   const { push } = useRouter();
+
+  // trim a string from product name to 20 chars
+  const productName = product.name.substring(0, 20) + "...";
+
   return (
-    <Card onClick={() => push(`/${product.name}?id=${product._id}`)} className={styles.card}>
+    <Card
+      onClick={() => push(`/${product.name}?id=${product._id}`)}
+      className={styles.card}
+    >
       <Card.Img variant="top" src={product.image} />
       <Card.Body className={styles.card_body}>
-        <Card.Title className="fw-bold fs-4">{product.name}</Card.Title>
+        <OverlayTrigger placement="bottom"
+          overlay={
+            <Tooltip id="tooltip-bottom">
+              {product.name}
+            </Tooltip>
+          }
+        >
+          <Card.Title className={styles.card_title}>{productName}</Card.Title>
+        </OverlayTrigger>
         <Card.Subtitle className="text-muted">{product.category}</Card.Subtitle>
-        <div sm={7} className="text-red mt-2 fs-5 d-flex flex-nowrap">
-          {product.price}
+        <div className="text-red mt-2 fs-6 d-flex flex-nowrap">
+          ${product.price}
         </div>
         <Row className="mt-2">
           <Col>

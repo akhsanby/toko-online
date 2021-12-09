@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { GetServerSideProps, NextPage } from "next";
 import { Container, Row, Col } from "react-bootstrap";
 import { Product } from "@/types";
@@ -7,6 +8,9 @@ import _Card from "@/components/_Card";
 import { Layout } from "@/components/Layout";
 import _Carousel from "@/components/_Carousel";
 import _CardSlider from "@/components/_CardSlider";
+
+// loading bar
+import LoadingBar from "react-top-loading-bar";
 
 interface HomeProps {
   products: Product[];
@@ -36,9 +40,6 @@ const Home: NextPage<HomeProps> = ({ products, error, e }) => {
               ))}
           </Row>
         </div>
-        {/* <div className="my-4 d-flex justify-content-center">
-          <button className={styles.custom_btn}>Browse More</button>
-        </div> */}
       </Container>
     </Layout>
   );

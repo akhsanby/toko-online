@@ -2,8 +2,22 @@
 
 .card {
   width: 100%;
+  cursor: pointer;
+  img {
+    height: 10rem;
+    width: 10rem;
+    margin: 0.5rem auto;
+  }
+  &:hover {
+    background-color: $lavender;
+  }
 }
 
 .card_body {
   font-family: $font-roboto !important;
+}
+
+.card_title {
+  font-weight: 700;
+  font-size: 1rem;
 }
