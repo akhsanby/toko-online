@@ -10,9 +10,6 @@ interface _CardProps {
 export default function _Card({ product }: _CardProps) {
   const { push } = useRouter();
 
-  // trim a string from product name to 20 chars
-  const productName = product.name.substring(0, 20) + "...";
-
   return (
     <Card
       onClick={() => push(`/${product.name}?id=${product._id}`)}
@@ -20,14 +17,11 @@ export default function _Card({ product }: _CardProps) {
     >
       <Card.Img variant="top" src={product.image} />
       <Card.Body className={styles.card_body}>
-        <OverlayTrigger placement="bottom"
-          overlay={
-            <Tooltip id="tooltip-bottom">
-              {product.name}
-            </Tooltip>
-          }
+        <OverlayTrigger
+          placement="bottom"
+          overlay={<Tooltip id="tooltip-bottom">{product.name}</Tooltip>}
         >
-          <Card.Title className={styles.card_title}>{productName}</Card.Title>
+          <Card.Title className={styles.card_title}>{product.name}</Card.Title>
         </OverlayTrigger>
         <Card.Subtitle className="text-muted">{product.category}</Card.Subtitle>
         <div className="text-red mt-2 fs-6 d-flex flex-nowrap">
