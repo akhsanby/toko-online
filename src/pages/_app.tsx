@@ -1,4 +1,11 @@
-import { useContext, createContext, useState, Dispatch, SetStateAction } from "react";
+import NextNProgress from "nextjs-progressbar";
+import {
+  useContext,
+  createContext,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { AppProps } from "next/app";
 import { CartItem, User } from "@/types";
 import { _getCart, _getUser } from "@/config/api";
@@ -25,6 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <GlobalState.Provider value={value}>
+      <NextNProgress color="#cf0f0f" />
       <Component {...pageProps} />
     </GlobalState.Provider>
   );
