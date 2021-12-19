@@ -20,4 +20,8 @@
 .card_title {
   font-weight: 700;
   font-size: 1rem;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
