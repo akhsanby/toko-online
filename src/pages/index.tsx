@@ -9,9 +9,6 @@ import { Layout } from "@/components/Layout";
 import _Carousel from "@/components/_Carousel";
 import _CardSlider from "@/components/_CardSlider";
 
-// loading bar
-import LoadingBar from "react-top-loading-bar";
-
 interface HomeProps {
   products: Product[];
   error?: string;
