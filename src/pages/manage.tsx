@@ -79,7 +79,9 @@ const Manage: NextPage = () => {
                 </td>
                 <td className={styles.custom_input}>
                   <Form.Control
-                    onChange={(e) => updateStock(e, index)}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      updateStock(e, index)
+                    }
                     value={product.stock}
                     type="number"
                   />

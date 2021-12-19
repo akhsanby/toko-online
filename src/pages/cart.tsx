@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Container, Table } from "react-bootstrap";
@@ -67,7 +67,7 @@ export default function Cart() {
           </tbody>
           <tfoot>
             <tr>
-              <th colspan="3">Subtotal</th>
+              <th colSpan={3}>Subtotal</th>
               <th>${getTotal(cart)}</th>
             </tr>
           </tfoot>

@@ -1,7 +1,11 @@
 import { Card } from "react-bootstrap";
 import styles from "../scss/Jumbotron.module.scss";
 
-export default function _Jumbotron({ title }) {
+type typeProps = {
+  title: string;
+};
+
+export default function _Jumbotron({ title }: typeProps) {
   return (
     <Card className={styles.card}>
       <Card.Body>

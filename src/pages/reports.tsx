@@ -59,7 +59,7 @@ const Reports: NextPage = () => {
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="3" className="fw-bold">
+              <td colSpan={3} className="fw-bold">
                 Total Income
               </td>
               <td className="fw-bold">${data?.total}</td>
