@@ -8,7 +8,6 @@ import {
 } from "react";
 import { AppProps } from "next/app";
 import { CartItem, User } from "@/types";
-import { _getCart, _getUser } from "@/config/api";
 import "@/scss/main.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
